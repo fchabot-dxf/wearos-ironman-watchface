@@ -1,0 +1,26 @@
+# Build and temporary files
+*.apk
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+out/
+build/
+.gradle/
+app/build/
+
+# Android Studio / IntelliJ IDEA
+*.iml
+.idea/
+.idea_modules/
+*.ipr
+*.iws
+
+# Local configuration
+local.properties
+.DS_Store
+Thumbs.db
+
+# OS / Tooling
+preview/*.png

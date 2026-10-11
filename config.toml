@@ -1,0 +1,54 @@
+# ==============================================================================
+# IRONMAN RETRO WATCH FACE — SINGLE RECONFIGURATION FILE
+# ==============================================================================
+# Edit values here on your computer, then build or preview!
+# All colors are in hex format (e.g. #FFEA580C or #EA580C)
+# Coordinates are based on a 450 x 450 circular watch canvas.
+# ==============================================================================
+
+[active_mode]
+# Screen background tint for active mode:
+# - Vintage Ironman LCD: "#CAD5BE"
+# - Pure Black OLED:     "#000000"
+lcd_background = "#CAD5BE"
+
+# Digits color in active mode:
+# - Vintage Dark LCD:    "#0F172A"
+# - High Contrast White: "#FFFFFF"
+digits_color = "#0F172A"
+
+# Outer accent ring color:
+# - Classic Orange:      "#EA580C"
+# - Racing Red:          "#DC2626"
+# - Electric Blue:       "#0284C7"
+# - Stealth Gray:        "#475569"
+accent_ring_color = "#EA580C"
+
+# Header banner text & color
+banner_text = "IRONMAN DEV DASHBOARD"
+banner_color = "#0284C7"
+
+# Show ticking seconds? (true / false)
+show_seconds = true
+
+
+[ambient_mode]
+# When watch goes idle / ambient AOD:
+# Background stays pure pitch-black OLED for 0% battery drain on black pixels
+ambient_background = "#000000"
+
+# Inverse glow color for the numbers when idle:
+# - Indiglo Cyan:        "#38BDF8"
+# - Crisp Luminescent:   "#F8FAFC"
+# - Vintage Amber:       "#F59E0B"
+# - Matrix Green:        "#10B981"
+ambient_glow_color = "#38BDF8"
+
+
+[test_suite_reporting]
+# Endpoint URL that returns test suite progress JSON:
+# e.g.: {"passed": 48, "total": 50, "status": "PASS"}
+status_url = "http://10.0.2.2:3000/api/test-status.json"
+
+# Update polling interval in seconds
+poll_interval_seconds = 60

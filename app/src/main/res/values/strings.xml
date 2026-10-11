@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Ironman Retro</string>
+    <string name="watch_face_name">Ironman Retro</string>
+    
+    <!-- User Configurable User Settings -->
+    <string name="setting_color_theme">Color Theme</string>
+    <string name="theme_classic_ironman">Classic Ironman (Amber / Gray)</string>
+    <string name="theme_indiglo">Indiglo Night Glow (Cyan)</string>
+    <string name="theme_stealth_oled">Stealth OLED (Monochrome)</string>
+    <string name="theme_cyber_neon">Cyberpunk Neon</string>
+
+    <string name="setting_accent_ring">Accent Ring Style</string>
+    <string name="accent_classic_orange">Iconic Orange</string>
+    <string name="accent_racing_red">Racing Red</string>
+    <string name="accent_electric_blue">Electric Blue</string>
+    <string name="accent_stealth">Stealth Dark</string>
+
+    <string name="setting_banner_text">Header Label</string>
+    <string name="banner_triathlon">TRIATHLON</string>
+    <string name="banner_developer">DEV STATUS</string>
+    <string name="banner_runner">ENDURANCE</string>
+
+    <string name="setting_time_format">Time Seconds</string>
+    <string name="seconds_visible">Show Seconds (10:09.36)</string>
+    <string name="seconds_hidden">Hide Seconds (10:09)</string>
+
+    <string name="setting_lcd_background">LCD Background Tint</string>
+    <string name="lcd_classic_green">Vintage LCD Tint</string>
+    <string name="lcd_pure_black">Pure Black OLED</string>
+
+    <!-- Tiles and Complications -->
+    <string name="tile_name">Test Suite Status</string>
+    <string name="tile_description">Displays automated test suite progress and statistics</string>
+    <string name="complication_provider_name">Test Suite Status</string>
+</resources>

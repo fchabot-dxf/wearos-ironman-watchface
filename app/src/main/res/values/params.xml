@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ======================================================== -->
+    <!-- WATCH FACE PARAMETERS (Edit right here on your computer) -->
+    <!-- ======================================================== -->
+
+    <!-- Active Mode Colors -->
+    <color name="param_active_lcd_bg">#CAD5BE</color>       <!-- Vintage LCD tint -->
+    <color name="param_active_digits">#0F172A</color>       <!-- Dark segmented LCD digits -->
+    <color name="param_active_accent_ring">#EA580C</color>  <!-- Iconic Ironman Orange ring -->
+    <color name="param_active_banner_text">#0284C7</color>  <!-- Header text color -->
+    <color name="param_bezel_casing">#1E2022</color>        <!-- Dark matte outer bezel -->
+    <color name="param_bezel_markings">#94A3B8</color>      <!-- Mode/Set text -->
+    <color name="param_button_bg">#2D3139</color>           <!-- Start/Lap button fill -->
+
+    <!-- Ambient / Idle Mode Colors -->
+    <color name="param_ambient_bg">#000000</color>          <!-- Pure black OLED (0% battery drain) -->
+    <color name="param_ambient_glow">#38BDF8</color>        <!-- Luminescent Indiglo Cyan inverse glow -->
+
+    <!-- Strings & Labels -->
+    <string name="param_banner_label">DEV DASHBOARD</string>
+    <string name="param_bezel_top_label">WATER RESISTANT 100M</string>
+    <string name="param_btn_left_label">START / STOP</string>
+    <string name="param_btn_right_label">LAP / RESET</string>
+
+    <!-- General App & Service Labels -->
+    <string name="app_name">Ironman Retro</string>
+    <string name="watch_face_name">Ironman Retro</string>
+    <string name="tile_name">Test Suite Status</string>
+    <string name="tile_description">Displays automated test suite progress and statistics</string>
+    <string name="complication_provider_name">Test Suite Status</string>
+</resources>

@@ -1,0 +1,160 @@
+<WatchFace width="450" height="450" clipShape="CIRCLE">
+    <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
+    <Metadata key="PREVIEW_TIME" value="10:09:36"/>
+
+    <!-- ======================================================== -->
+    <!-- SCENE                                                    -->
+    <!-- Pure circular watch face with declared parameters         -->
+    <!-- ======================================================== -->
+    <Scene backgroundColor="@color/param_ambient_bg">
+
+        <!-- ==================================================== -->
+        <!-- ACTIVE-ONLY CIRCULAR BEZEL & CASING                  -->
+        <!-- ==================================================== -->
+        <Compare expression="![IS_AMBIENT]">
+
+            <!-- Outer Matte Industrial Bezel -->
+            <PartDraw x="0" y="0" width="450" height="450">
+                <Stroke color="@color/param_bezel_casing" thickness="20">
+                    <Arc startAngle="0" endAngle="360"/>
+                </Stroke>
+            </PartDraw>
+
+            <!-- Circular Accent Ring -->
+            <PartDraw x="18" y="18" width="414" height="414">
+                <Stroke color="@color/param_active_accent_ring" thickness="4">
+                    <Arc startAngle="0" endAngle="360"/>
+                </Stroke>
+            </PartDraw>
+
+            <!-- Circular Vintage LCD Dial (Pure Circle) -->
+            <PartDraw x="24" y="24" width="402" height="402">
+                <FilledArc startAngle="0" endAngle="360" color="@color/param_active_lcd_bg"/>
+                <Stroke color="@color/param_bezel_casing" thickness="2">
+                    <Arc startAngle="0" endAngle="360"/>
+                </Stroke>
+            </PartDraw>
+
+            <!-- Top Header Banner Label -->
+            <PartText x="75" y="55" width="300" height="30">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="14" weight="BOLD" color="@color/param_active_banner_text">
+                        <Template>@string/param_banner_label</Template>
+                    </Font>
+                </Text>
+            </PartText>
+
+            <!-- LCD Circular Inner Separator Arc / Line -->
+            <PartDraw x="50" y="145" width="350" height="2">
+                <Line startX="50" startY="145" endX="400" endY="145" color="#849377" thickness="2"/>
+            </PartDraw>
+
+            <!-- Seconds Display (Ticking in Active mode) -->
+            <PartText x="285" y="246" width="90" height="70">
+                <Text align="START">
+                    <Font family="MONOSPACE" size="44" weight="BOLD" color="@color/param_active_digits">
+                        <Template>.%02d</Template>
+                        <Parameter expression="[SECOND]"/>
+                    </Font>
+                </Text>
+            </PartText>
+
+        </Compare>
+
+        <!-- ==================================================== -->
+        <!-- CORE TIME & DATA: PARAMETRIC ACTIVE / IDLE INVERSION -->
+        <!-- Active -> @color/param_active_digits                 -->
+        <!-- Idle   -> @color/param_ambient_glow                  -->
+        <!-- ==================================================== -->
+
+        <!-- ROW 1: DAY OF WEEK + DATE (Top Left) -->
+        <PartText x="70" y="100" width="160" height="38">
+            <Text align="START">
+                <Font family="MONOSPACE" size="24" weight="BOLD"
+                      color="[IS_AMBIENT] ? @color/param_ambient_glow : @color/param_active_digits">
+                    <Template>%s %02d.%02d</Template>
+                    <Parameter expression="[DAY_OF_WEEK_F_TO_S]"/>
+                    <Parameter expression="[MONTH_1_12]"/>
+                    <Parameter expression="[DAY_1_31]"/>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- TOP RIGHT COMPLICATION SLOT (Weather) -->
+        <ComplicationSlot
+            id="slot_top_right"
+            x="240" y="96" width="140" height="44"
+            supportedTypes="SHORT_TEXT ICON SMALL_IMAGE RANGED_VALUE">
+            <DefaultProviderPolicy defaultSystemProvider="WEATHER" defaultSystemProviderType="SHORT_TEXT"/>
+            
+            <Complication type="SHORT_TEXT">
+                <PartText x="0" y="0" width="140" height="44">
+                    <Text align="END">
+                        <Font family="MONOSPACE" size="20" weight="BOLD" 
+                              color="[IS_AMBIENT] ? @color/param_ambient_glow : @color/param_active_digits">
+                            <Template>[COMPLICATION.TEXT]</Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- MIDDLE COMPLICATION SLOT (Test Suite Progress Bar) -->
+        <ComplicationSlot
+            id="slot_progress"
+            x="70" y="160" width="310" height="30"
+            supportedTypes="RANGED_VALUE SHORT_TEXT NO_DATA">
+            <DefaultProviderPolicy defaultSystemProvider="BATTERY" defaultSystemProviderType="RANGED_VALUE"/>
+            
+            <Complication type="RANGED_VALUE">
+                <!-- Frame -->
+                <PartDraw x="0" y="4" width="180" height="22">
+                    <Stroke color="[IS_AMBIENT] ? @color/param_ambient_glow : @color/param_active_digits" thickness="2">
+                        <RoundRectangle cornerRadiusX="3" cornerRadiusY="3"/>
+                    </Stroke>
+                </PartDraw>
+                <!-- Filled Segment -->
+                <PartDraw x="2" y="6" width="176" height="18">
+                    <FilledRoundRectangle 
+                        color="[IS_AMBIENT] ? @color/param_ambient_glow : @color/param_active_accent_ring"
+                        cornerRadiusX="2" cornerRadiusY="2"/>
+                </PartDraw>
+                <!-- Percentage text -->
+                <PartText x="190" y="2" width="120" height="26">
+                    <Text align="START">
+                        <Font family="MONOSPACE" size="16" weight="BOLD"
+                              color="[IS_AMBIENT] ? @color/param_ambient_glow : @color/param_active_digits">
+                            <Template>%02d%% [COMPLICATION.TEXT]</Template>
+                            <Parameter expression="round([COMPLICATION.RANGED_VALUE_VALUE])"/>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+
+            <Complication type="SHORT_TEXT">
+                <PartText x="0" y="2" width="310" height="26">
+                    <Text align="CENTER">
+                        <Font family="MONOSPACE" size="16" weight="BOLD"
+                              color="[IS_AMBIENT] ? @color/param_ambient_glow : @color/param_active_digits">
+                            <Template>[COMPLICATION.TEXT]</Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- MAIN DIGITAL TIME (Hours : Minutes) -->
+        <!-- Center weighted large numerals -->
+        <PartText x="50" y="220" width="230" height="120">
+            <Text align="END">
+                <Font family="MONOSPACE" size="84" weight="BOLD"
+                      color="[IS_AMBIENT] ? @color/param_ambient_glow : @color/param_active_digits">
+                    <Template>%02d:%02d</Template>
+                    <Parameter expression="[HOUR_0_23]"/>
+                    <Parameter expression="[MINUTE]"/>
+                </Font>
+            </Text>
+        </PartText>
+
+    </Scene>
+</WatchFace>
