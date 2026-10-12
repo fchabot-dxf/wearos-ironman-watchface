@@ -4,162 +4,92 @@
 
     <!-- ======================================================== -->
     <!-- SCENE                                                    -->
-    <!-- Authentic Timex Ironman 14-Segment LCD Watch Face        -->
+    <!-- Full-Time Indiglo Retro Ironman Watch Face               -->
+    <!-- Active: 100% Opacity Indiglo Cyan (#38BDF8)              -->
+    <!-- AOD / Ambient: 40% Opacity Indiglo (alpha=102)           -->
     <!-- ======================================================== -->
     <Scene backgroundColor="#000000">
 
-        <!-- Outer Matte Industrial Bezel & Circular LCD -->
+        <!-- Clean Thin Separator Line at y=320 -->
         <PartDraw x="0" y="0" width="450" height="450">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <!-- Outer Matte Bezel -->
-            <Ellipse x="0" y="0" width="450" height="450">
-                <Stroke color="#1E2022" thickness="20"/>
-            </Ellipse>
-
-            <!-- Circular Accent Ring (Iconic Orange) -->
-            <Ellipse x="18" y="18" width="414" height="414">
-                <Stroke color="#EA580C" thickness="4"/>
-            </Ellipse>
-
-            <!-- Circular Vintage LCD Dial (Pure Circle) -->
-            <Ellipse x="24" y="24" width="402" height="402">
-                <Fill color="#CAD5BE"/>
-                <Stroke color="#1E2022" thickness="2"/>
-            </Ellipse>
-
-            <!-- Fine LCD Top Separator Line -->
-            <Line startX="55" startY="126" endX="395" endY="126">
-                <Stroke color="#849377" thickness="2"/>
-            </Line>
-
-            <!-- Fine LCD Bottom Separator Line -->
-            <Line startX="85" startY="324" endX="365" endY="324">
-                <Stroke color="#849377" thickness="2"/>
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Line startX="85" startY="320" endX="365" endY="320">
+                <Stroke color="#38BDF8" thickness="2"/>
             </Line>
         </PartDraw>
 
         <!-- ======================================================== -->
-        <!-- GHOST INACTIVE SEGMENTS (Faint ~5% Unlit LCD Segments)   -->
+        <!-- TOP DATE ROW (y=68 in 34pt DSEG)                         -->
         <!-- ======================================================== -->
-        <!-- Top Date Ghost -->
         <PartText x="50" y="68" width="350" height="50">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Text align="CENTER">
-                <Font family="dseg14_classic_bold_italic" size="34" color="#C2CEB7">
-                    <Template>~~~ ~~~ ~~</Template>
-                </Font>
-            </Text>
-        </PartText>
-
-        <!-- Middle Progress Bar Strip (Authentic LCD Segment Pips + Project + ETA) -->
-        <!-- Project Name in 14-Segment LCD (e.g. BSPLINE) -->
-        <PartText x="52" y="134" width="110" height="26">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Text align="START">
-                <Font family="dseg14_classic_bold_italic" size="18" color="#0F172A">
-                    <Template>BSPLINE</Template>
-                </Font>
-            </Text>
-        </PartText>
-
-        <!-- 10 Discrete LCD Pip Segments (No outer frame, 10% unlit ghost contrast) -->
-        <PartDraw x="165" y="138" width="120" height="18">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <!-- 10 Ghost LCD Segments (10% opacity contrast) -->
-            <Rectangle x="0" y="0" width="9" height="16"><Fill color="#BAC4AC"/></Rectangle>
-            <Rectangle x="12" y="0" width="9" height="16"><Fill color="#BAC4AC"/></Rectangle>
-            <Rectangle x="24" y="0" width="9" height="16"><Fill color="#BAC4AC"/></Rectangle>
-            <Rectangle x="36" y="0" width="9" height="16"><Fill color="#BAC4AC"/></Rectangle>
-            <Rectangle x="48" y="0" width="9" height="16"><Fill color="#BAC4AC"/></Rectangle>
-            <Rectangle x="60" y="0" width="9" height="16"><Fill color="#BAC4AC"/></Rectangle>
-            <Rectangle x="72" y="0" width="9" height="16"><Fill color="#BAC4AC"/></Rectangle>
-            <Rectangle x="84" y="0" width="9" height="16"><Fill color="#BAC4AC"/></Rectangle>
-            <Rectangle x="96" y="0" width="9" height="16"><Fill color="#BAC4AC"/></Rectangle>
-            <Rectangle x="108" y="0" width="9" height="16"><Fill color="#BAC4AC"/></Rectangle>
-
-            <!-- Lit Segments (8 of 10 lit for 86%) -->
-            <Rectangle x="0" y="0" width="9" height="16"><Fill color="#0F172A"/></Rectangle>
-            <Rectangle x="12" y="0" width="9" height="16"><Fill color="#0F172A"/></Rectangle>
-            <Rectangle x="24" y="0" width="9" height="16"><Fill color="#0F172A"/></Rectangle>
-            <Rectangle x="36" y="0" width="9" height="16"><Fill color="#0F172A"/></Rectangle>
-            <Rectangle x="48" y="0" width="9" height="16"><Fill color="#0F172A"/></Rectangle>
-            <Rectangle x="60" y="0" width="9" height="16"><Fill color="#0F172A"/></Rectangle>
-            <Rectangle x="72" y="0" width="9" height="16"><Fill color="#0F172A"/></Rectangle>
-            <Rectangle x="84" y="0" width="9" height="16"><Fill color="#0F172A"/></Rectangle>
-        </PartDraw>
-
-        <!-- Percent & Remaining Estimated Time (Digits in DSEG, % in Prominent Normal Font) -->
-        <PartText x="288" y="134" width="28" height="26">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Text align="START">
-                <Font family="dseg14_classic_bold_italic" size="18" color="#0F172A">
-                    <Template>86</Template>
-                </Font>
-            </Text>
-        </PartText>
-        <PartText x="314" y="131" width="18" height="24">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Text align="START">
-                <Font family="SYNC_TO_DEVICE" size="18" weight="BOLD" color="#0F172A">
-                    <Template>%%</Template>
-                </Font>
-            </Text>
-        </PartText>
-        <PartText x="334" y="134" width="55" height="26">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Text align="START">
-                <Font family="dseg14_classic_bold_italic" size="18" color="#0F172A">
-                    <Template>-4M</Template>
-                </Font>
-            </Text>
-        </PartText>
-
-        <!-- Main Time Ghost -->
-        <PartText x="35" y="162" width="380" height="125">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Text align="CENTER">
-                <Font family="dseg14_classic_bold_italic" size="96" color="#C2CEB7">
-                    <Template>~~:~~</Template>
-                </Font>
-            </Text>
-        </PartText>
-
-        <!-- ======================================================== -->
-        <!-- ACTIVE DISPLAY (Top Date & Main Time)                    -->
-        <!-- ======================================================== -->
-        <!-- TOP ROW: DAY OF WEEK + MONTH + DAY (e.g. MON OCT 12)     -->
-        <!-- Active mode: Dark retro LCD digits -->
-        <PartText x="50" y="68" width="350" height="50">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Text align="CENTER">
-                <Font family="dseg14_classic_bold_italic" size="34" color="#0F172A">
-                    <Template>%1$s %2$s %3$02d<Parameter expression="[DAY_OF_WEEK_S]"/><Parameter expression="[MONTH_S]"/><Parameter expression="[DAY]"/></Template>
-                </Font>
-            </Text>
-        </PartText>
-        <!-- Ambient mode: High-contrast crisp Ice-Blue / White OLED for night glanceability -->
-        <PartText x="50" y="68" width="350" height="50" alpha="0">
-            <Variant mode="AMBIENT" target="alpha" value="255"/>
-            <Text align="CENTER">
-                <Font family="dseg14_classic_bold_italic" size="34" color="#E2E8F0">
+                <Font family="dseg14_classic_bold_italic" size="34" color="#38BDF8">
                     <Template>%1$s %2$s %3$02d<Parameter expression="[DAY_OF_WEEK_S]"/><Parameter expression="[MONTH_S]"/><Parameter expression="[DAY]"/></Template>
                 </Font>
             </Text>
         </PartText>
 
-        <!-- MAIN DIGITAL TIME (Hours : Minutes) in 14-Segment (Centered, Bold, Slanted) -->
-        <!-- Active mode: Dark retro LCD digits -->
-        <PartText x="35" y="162" width="380" height="125">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Text align="CENTER">
-                <Font family="dseg14_classic_bold_italic" size="96" color="#0F172A">
-                    <Template>%1$02d:%2$02d<Parameter expression="[HOUR_0_23]"/><Parameter expression="[MINUTE]"/></Template>
-                </Font>
-            </Text>
-        </PartText>
-        <!-- Ambient mode: Crisp, vibrant Indiglo Cyan-Blue on pure black OLED, highly readable in the dark -->
-        <PartText x="35" y="162" width="380" height="125" alpha="0">
-            <Variant mode="AMBIENT" target="alpha" value="255"/>
+        <!-- ======================================================== -->
+        <!-- MIDDLE COMPLICATION SLOT (Progress Bar / Newsflash y=122)-->
+        <!-- ======================================================== -->
+        <ComplicationSlot
+            id="100"
+            x="40" y="122" width="370" height="28"
+            supportedTypes="SHORT_TEXT RANGED_VALUE NO_DATA">
+            <DefaultProviderPolicy
+                defaultSystemProviderType="SHORT_TEXT"
+                primaryProvider="com.dansemur.ironman/com.dansemur.ironman.complication.TestSuiteComplicationService"
+                primaryProviderType="SHORT_TEXT"/>
+
+            <!-- When Tests Active: Ranged Value Progress Bar -->
+            <Complication type="RANGED_VALUE">
+                <PartText x="20" y="0" width="100" height="26">
+                    <Variant mode="AMBIENT" target="alpha" value="102"/>
+                    <Text align="START">
+                        <Font family="dseg14_classic_bold_italic" size="16" color="#38BDF8">
+                            <Template>[COMPLICATION.TEXT]</Template>
+                        </Font>
+                    </Text>
+                </PartText>
+                <PartDraw x="125" y="6" width="120" height="12">
+                    <Variant mode="AMBIENT" target="alpha" value="102"/>
+                    <Stroke color="#38BDF8" thickness="1">
+                        <RoundRectangle cornerRadiusX="2" cornerRadiusY="2"/>
+                    </Stroke>
+                </PartDraw>
+                <PartDraw x="127" y="8" width="116" height="8">
+                    <Variant mode="AMBIENT" target="alpha" value="102"/>
+                    <FilledRoundRectangle color="#38BDF8" cornerRadiusX="1" cornerRadiusY="1"/>
+                </PartDraw>
+                <PartText x="250" y="0" width="100" height="26">
+                    <Variant mode="AMBIENT" target="alpha" value="102"/>
+                    <Text align="START">
+                        <Font family="dseg14_classic_bold_italic" size="16" color="#38BDF8">
+                            <Template>%1$02d%%<Parameter expression="round([COMPLICATION.RANGED_VALUE_VALUE])"/></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+
+            <!-- When Idle: Newsflash Line (Space, Science, Quebec) -->
+            <Complication type="SHORT_TEXT">
+                <PartText x="0" y="2" width="370" height="24">
+                    <Variant mode="AMBIENT" target="alpha" value="102"/>
+                    <Text align="CENTER">
+                        <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#38BDF8">
+                            <Template>[COMPLICATION.TEXT]</Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- ======================================================== -->
+        <!-- MAIN DIGITAL TIME (Hours : Minutes at y=160 in 96pt DSEG) -->
+        <!-- ======================================================== -->
+        <PartText x="35" y="160" width="380" height="125">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Text align="CENTER">
                 <Font family="dseg14_classic_bold_italic" size="96" color="#38BDF8">
                     <Template>%1$02d:%2$02d<Parameter expression="[HOUR_0_23]"/><Parameter expression="[MINUTE]"/></Template>
@@ -168,166 +98,207 @@
         </PartText>
 
         <!-- ======================================================== -->
-        <!-- STEPS & HEART RATE POD (Between Main Time & Bottom Line) -->
+        <!-- STEPS & HEART RATE POD (Snug at y=288, NO BPM TEXT)      -->
         <!-- ======================================================== -->
-        <!-- 1. Left Pod: Steps (Single Footprint Sole Vector + Count in DSEG) -->
+        <!-- Left: Steps Sole Icon -->
         <PartDraw x="108" y="291" width="14" height="18">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <!-- Upper Footprint Sole -->
-            <Ellipse x="2" y="0" width="10" height="11"><Fill color="#0F172A"/></Ellipse>
-            <!-- Lower Heel Sole -->
-            <Ellipse x="3" y="13" width="8" height="5"><Fill color="#0F172A"/></Ellipse>
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Ellipse x="2" y="0" width="10" height="11"><Fill color="#38BDF8"/></Ellipse>
+            <Ellipse x="3" y="13" width="8" height="5"><Fill color="#38BDF8"/></Ellipse>
         </PartDraw>
-        <!-- Steps Ghost Digits (5 Segments) -->
+
+        <!-- Steps Live Digits -->
         <PartText x="126" y="288" width="75" height="24">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Text align="END">
-                <Font family="dseg14_classic_bold_italic" size="20" color="#C2CEB7">
-                    <Template>~~~~~</Template>
-                </Font>
-            </Text>
-        </PartText>
-        <!-- Steps Live Telemetry -->
-        <PartText x="126" y="288" width="75" height="24">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Text align="END">
-                <Font family="dseg14_classic_bold_italic" size="20" color="#0F172A">
+                <Font family="dseg14_classic_bold_italic" size="20" color="#38BDF8">
                     <Template>%1$d<Parameter expression="[STEP_COUNT] &gt; 0 ? [STEP_COUNT] : 8420"/></Template>
                 </Font>
             </Text>
         </PartText>
 
-        <!-- 2. Right Pod: Heart Rate (Solid Black Curved Heart Vector + DSEG Digits + Normal BPM) -->
-        <PartDraw x="238" y="291" width="16" height="15">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <!-- Top Curved Lobes -->
-            <Ellipse x="1" y="0" width="7" height="7"><Fill color="#0F172A"/></Ellipse>
-            <Ellipse x="8" y="0" width="7" height="7"><Fill color="#0F172A"/></Ellipse>
-            <!-- Solid Seamless Body -->
-            <Rectangle x="1" y="3" width="14" height="6"><Fill color="#0F172A"/></Rectangle>
-            <Rectangle x="2" y="7" width="12" height="3"><Fill color="#0F172A"/></Rectangle>
-            <Rectangle x="4" y="10" width="8" height="3"><Fill color="#0F172A"/></Rectangle>
-            <Rectangle x="6" y="13" width="4" height="2"><Fill color="#0F172A"/></Rectangle>
-            <Rectangle x="7" y="14" width="2" height="1"><Fill color="#0F172A"/></Rectangle>
+        <!-- Right: Heart Icon (NO BPM TEXT) -->
+        <PartDraw x="246" y="291" width="16" height="15">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Ellipse x="1" y="0" width="7" height="7"><Fill color="#38BDF8"/></Ellipse>
+            <Ellipse x="8" y="0" width="7" height="7"><Fill color="#38BDF8"/></Ellipse>
+            <Rectangle x="1" y="3" width="14" height="6"><Fill color="#38BDF8"/></Rectangle>
+            <Rectangle x="2" y="7" width="12" height="3"><Fill color="#38BDF8"/></Rectangle>
+            <Rectangle x="4" y="10" width="8" height="3"><Fill color="#38BDF8"/></Rectangle>
+            <Rectangle x="6" y="13" width="4" height="2"><Fill color="#38BDF8"/></Rectangle>
+            <Rectangle x="7" y="14" width="2" height="1"><Fill color="#38BDF8"/></Rectangle>
         </PartDraw>
-        <!-- Heart Rate Digits in Authentic DSEG 14-Segment Font -->
-        <PartText x="256" y="288" width="45" height="24">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Text align="END">
-                <Font family="dseg14_classic_bold_italic" size="20" color="#0F172A">
+
+        <!-- Heart Rate Digits in Authentic DSEG (NO BPM TEXT) -->
+        <PartText x="268" y="288" width="55" height="24">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Text align="START">
+                <Font family="dseg14_classic_bold_italic" size="20" color="#38BDF8">
                     <Template>%1$d<Parameter expression="[HEART_RATE] &gt; 0 ? round([HEART_RATE]) : 72"/></Template>
                 </Font>
             </Text>
         </PartText>
-        <!-- BPM Label in Clean Normal Device Font -->
-        <PartText x="303" y="292" width="30" height="18">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Text align="START">
-                <Font family="SYNC_TO_DEVICE" size="11" weight="BOLD" color="#0F172A">
-                    <Template>BPM</Template>
-                </Font>
-            </Text>
-        </PartText>
-
-        <!-- Ambient Mode Heart Rate & Step summary (Low power glanceability) -->
-        <PartText x="200" y="288" width="200" height="24" alpha="0">
-            <Variant mode="AMBIENT" target="alpha" value="255"/>
-            <Text align="CENTER">
-                <Font family="SYNC_TO_DEVICE" size="14" color="#94A3B8">
-                    <Template>%1$d BPM<Parameter expression="[HEART_RATE] &gt; 0 ? round([HEART_RATE]) : 72"/></Template>
-                </Font>
-            </Text>
-        </PartText>
 
         <!-- ======================================================== -->
-        <!-- BOTTOM SECTION: DEDICATED BALANCED WEATHER POD             -->
+        <!-- BOTTOM SECTION: LOWER TELEMETRY MODULE                   -->
         <!-- ======================================================== -->
-        <!-- TIER 1 (y="333"): Large Hero Sun Icon + 36pt Current Temperature -->
-        <PartDraw x="156" y="333" width="36" height="36">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <!-- Center Sun Disk -->
-            <Ellipse x="9" y="9" width="18" height="18"><Fill color="#0F172A"/></Ellipse>
-            <!-- 8 Cardinal & Diagonal Rays (3.5px thickness) -->
-            <Line startX="18" startY="0" endX="18" endY="6"><Stroke color="#0F172A" thickness="3"/></Line>
-            <Line startX="18" startY="30" endX="18" endY="36"><Stroke color="#0F172A" thickness="3"/></Line>
-            <Line startX="0" startY="18" endX="6" endY="18"><Stroke color="#0F172A" thickness="3"/></Line>
-            <Line startX="30" startY="18" endX="36" endY="18"><Stroke color="#0F172A" thickness="3"/></Line>
-            <Line startX="5" startY="5" endX="9" endY="9"><Stroke color="#0F172A" thickness="3"/></Line>
-            <Line startX="31" startY="5" endX="27" endY="9"><Stroke color="#0F172A" thickness="3"/></Line>
-            <Line startX="5" startY="31" endX="9" endY="27"><Stroke color="#0F172A" thickness="3"/></Line>
-            <Line startX="31" startY="31" endX="27" endY="27"><Stroke color="#0F172A" thickness="3"/></Line>
+        <!-- TIER 1 (y="330"): Weather (Left) + Battery (Right) in 32pt DSEG -->
+        <!-- 1. Left Weather: Sun Icon + Current Temperature -->
+        <PartDraw x="126" y="336" width="24" height="24">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Ellipse x="6" y="6" width="12" height="12"><Fill color="#38BDF8"/></Ellipse>
+            <Line startX="12" startY="0" endX="12" endY="4"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="12" startY="20" endX="12" endY="24"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="0" startY="12" endX="4" endY="12"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="20" startY="12" endX="24" endY="12"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="3" startY="3" endX="6" endY="6"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="21" startY="3" endX="18" endY="6"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="3" startY="21" endX="6" endY="18"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="21" startY="21" endX="18" endY="18"><Stroke color="#38BDF8" thickness="2"/></Line>
         </PartDraw>
 
-        <!-- Current Temperature: Prominent Digits in DSEG + Degree Symbol -->
-        <PartText x="200" y="328" width="55" height="40">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
+        <!-- Current Temp Digits (32pt DSEG, unclipped 60px width box) -->
+        <PartText x="146" y="330" width="60" height="36">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Text align="START">
-                <Font family="dseg14_classic_bold_italic" size="36" color="#0F172A">
+                <Font family="dseg14_classic_bold_italic" size="32" color="#38BDF8">
                     <Template>%1$02d<Parameter expression="round([WEATHER.TEMPERATURE])"/></Template>
                 </Font>
             </Text>
         </PartText>
-        <PartText x="256" y="325" width="20" height="24">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
+        <PartText x="204" y="328" width="18" height="20">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Text align="START">
-                <Font family="SYNC_TO_DEVICE" size="22" weight="BOLD" color="#0F172A">
+                <Font family="SYNC_TO_DEVICE" size="20" weight="BOLD" color="#38BDF8">
                     <Template>°</Template>
                 </Font>
             </Text>
         </PartText>
 
-        <!-- TIER 2 (y="378"): Wide High & Low Range with Dot Divider -->
-        <!-- High Pod: Up Arrow ▲ + Value + ° -->
-        <PartDraw x="138" y="384" width="12" height="12">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Line startX="6" startY="0" endX="0" endY="11"><Stroke color="#0F172A" thickness="2"/></Line>
-            <Line startX="6" startY="0" endX="12" endY="11"><Stroke color="#0F172A" thickness="2"/></Line>
-            <Line startX="0" startY="11" endX="12" endY="11"><Stroke color="#0F172A" thickness="2"/></Line>
-            <Rectangle x="4" y="6" width="4" height="4"><Fill color="#0F172A"/></Rectangle>
+        <!-- 2. Right Battery: Mini LCD Battery Icon + Digits + % (x=301) -->
+        <PartDraw x="238" y="339" width="20" height="11">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <!-- Outer Battery Shell -->
+            <Stroke color="#38BDF8" thickness="1.5">
+                <RoundRectangle cornerRadiusX="2" cornerRadiusY="2"/>
+            </Stroke>
+            <!-- Battery Positive Terminal Nub -->
+            <Rectangle x="19" y="3" width="2" height="5"><Fill color="#38BDF8"/></Rectangle>
+            <!-- Dynamic Battery Fill Bars -->
+            <Rectangle x="2" y="2" width="3" height="7">
+                <Variant mode="[BATTERY_PERCENT] &gt;= 15" target="alpha" value="255"/>
+                <Variant mode="[BATTERY_PERCENT] &lt; 15" target="alpha" value="0"/>
+                <Fill color="#38BDF8"/>
+            </Rectangle>
+            <Rectangle x="6" y="2" width="3" height="7">
+                <Variant mode="[BATTERY_PERCENT] &gt;= 35" target="alpha" value="255"/>
+                <Variant mode="[BATTERY_PERCENT] &lt; 35" target="alpha" value="0"/>
+                <Fill color="#38BDF8"/>
+            </Rectangle>
+            <Rectangle x="10" y="2" width="3" height="7">
+                <Variant mode="[BATTERY_PERCENT] &gt;= 60" target="alpha" value="255"/>
+                <Variant mode="[BATTERY_PERCENT] &lt; 60" target="alpha" value="0"/>
+                <Fill color="#38BDF8"/>
+            </Rectangle>
+            <Rectangle x="14" y="2" width="3" height="7">
+                <Variant mode="[BATTERY_PERCENT] &gt;= 85" target="alpha" value="255"/>
+                <Variant mode="[BATTERY_PERCENT] &lt; 85" target="alpha" value="0"/>
+                <Fill color="#38BDF8"/>
+            </Rectangle>
         </PartDraw>
-        <PartText x="154" y="377" width="32" height="26">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
+
+        <!-- Battery Digits (22pt DSEG) -->
+        <PartText x="262" y="334" width="42" height="26">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Text align="START">
-                <Font family="dseg14_classic_bold_italic" size="22" color="#0F172A">
+                <Font family="dseg14_classic_bold_italic" size="22" color="#38BDF8">
+                    <Template>%1$02d<Parameter expression="round([BATTERY_PERCENT])"/></Template>
+                </Font>
+            </Text>
+        </PartText>
+        <!-- % Symbol perfectly placed at x=301 without collision -->
+        <PartText x="301" y="333" width="18" height="22">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Text align="START">
+                <Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#38BDF8">
+                    <Template>%%</Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- ======================================================== -->
+        <!-- TIER 2 (y="375"): High (Left) + Rain (Mid) + Low (Right) -->
+        <!-- ======================================================== -->
+        <!-- 1. High: Stick Arrow ↑ + Value + ° -->
+        <PartDraw x="115" y="377" width="12" height="15">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Line startX="6" startY="14" endX="6" endY="0"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="6" startY="0" endX="2" endY="4"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="6" startY="0" endX="10" endY="4"><Stroke color="#38BDF8" thickness="2"/></Line>
+        </PartDraw>
+
+        <PartText x="125" y="374" width="34" height="24">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Text align="START">
+                <Font family="dseg14_classic_bold_italic" size="20" color="#38BDF8">
                     <Template>%1$02d<Parameter expression="round([WEATHER.TEMPERATURE] + 3)"/></Template>
                 </Font>
             </Text>
         </PartText>
-        <PartText x="188" y="375" width="14" height="18">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
+        <PartText x="155" y="372" width="14" height="18">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Text align="START">
-                <Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#0F172A">
+                <Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#38BDF8">
                     <Template>°</Template>
                 </Font>
             </Text>
         </PartText>
 
-        <!-- Center LCD Bullet Divider -->
-        <PartDraw x="223" y="389" width="4" height="4">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Ellipse x="0" y="0" width="4" height="4"><Fill color="#849377"/></Ellipse>
+        <!-- 2. Center: Rain Droplet 💧 + Probability in DSEG -->
+        <PartDraw x="199" y="377" width="10" height="14">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Line startX="5" startY="0" endX="1" endY="8"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="5" startY="0" endX="9" endY="8"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Ellipse x="1" y="5" width="8" height="9"><Fill color="#38BDF8"/></Ellipse>
         </PartDraw>
 
-        <!-- Low Pod: Down Arrow ▼ + Value + ° -->
-        <PartDraw x="244" y="384" width="12" height="12">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
-            <Line startX="0" startY="1" endX="12" endY="1"><Stroke color="#0F172A" thickness="2"/></Line>
-            <Line startX="0" startY="1" endX="6" endY="12"><Stroke color="#0F172A" thickness="2"/></Line>
-            <Line startX="12" startY="1" endX="6" endY="12"><Stroke color="#0F172A" thickness="2"/></Line>
-            <Rectangle x="4" y="3" width="4" height="4"><Fill color="#0F172A"/></Rectangle>
-        </PartDraw>
-        <PartText x="260" y="377" width="32" height="26">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
+        <PartText x="214" y="374" width="34" height="24">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Text align="START">
-                <Font family="dseg14_classic_bold_italic" size="22" color="#0F172A">
+                <Font family="dseg14_classic_bold_italic" size="20" color="#38BDF8">
+                    <Template>%1$02d<Parameter expression="[WEATHER.CHANCE_OF_PRECIPITATION] &gt;= 0 ? round([WEATHER.CHANCE_OF_PRECIPITATION]) : 0"/></Template>
+                </Font>
+            </Text>
+        </PartText>
+        <PartText x="244" y="376" width="16" height="18">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Text align="START">
+                <Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#38BDF8">
+                    <Template>%%</Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- 3. Low: Stick Arrow ↓ + Value + ° -->
+        <PartDraw x="285" y="377" width="12" height="15">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Line startX="6" startY="0" endX="6" endY="14"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="6" startY="14" endX="2" endY="10"><Stroke color="#38BDF8" thickness="2"/></Line>
+            <Line startX="6" startY="14" endX="10" endY="10"><Stroke color="#38BDF8" thickness="2"/></Line>
+        </PartDraw>
+
+        <PartText x="295" y="374" width="34" height="24">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Text align="START">
+                <Font family="dseg14_classic_bold_italic" size="20" color="#38BDF8">
                     <Template>%1$02d<Parameter expression="round([WEATHER.TEMPERATURE] - 7)"/></Template>
                 </Font>
             </Text>
         </PartText>
-        <PartText x="294" y="375" width="14" height="18">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
+        <PartText x="325" y="372" width="14" height="18">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Text align="START">
-                <Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#0F172A">
+                <Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#38BDF8">
                     <Template>°</Template>
                 </Font>
             </Text>
