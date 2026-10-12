@@ -38,11 +38,12 @@ show_seconds = true
 ambient_background = "#000000"
 
 # Inverse glow color for the numbers when idle:
-# - Indiglo Cyan:        "#38BDF8"
-# - Crisp Luminescent:   "#F8FAFC"
-# - Vintage Amber:       "#F59E0B"
-# - Matrix Green:        "#10B981"
-ambient_glow_color = "#38BDF8"
+# - Indiglo Cyan (100%):   "#38BDF8"
+# - Indiglo Cyan (50% Dim):"#1D6280"
+# - Crisp Luminescent:     "#F8FAFC"
+# - Vintage Amber:         "#F59E0B"
+ambient_glow_color = "#1D6280"
+ambient_brightness = "50%"
 
 
 [test_suite_reporting]

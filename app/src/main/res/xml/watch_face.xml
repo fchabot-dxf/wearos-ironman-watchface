@@ -2,6 +2,10 @@
     <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
     <Metadata key="PREVIEW_TIME" value="10:09:00"/>
 
+    <UserConfigurations>
+        <BooleanConfiguration id="show_complication" displayName="Complication" defaultValue="TRUE"/>
+    </UserConfigurations>
+
     <!-- ======================================================== -->
     <!-- SCENE                                                    -->
     <!-- Full-Time Indiglo Retro Ironman Watch Face               -->
@@ -34,12 +38,15 @@
         <!-- MIDDLE COMPLICATION SLOT (Progress Bar / Newsflash y=122)-->
         <!-- ======================================================== -->
         <ComplicationSlot
-            id="100"
+            slotId="1"
             x="40" y="122" width="370" height="28"
-            supportedTypes="SHORT_TEXT RANGED_VALUE NO_DATA">
+            supportedTypes="SHORT_TEXT RANGED_VALUE EMPTY"
+            isCustomizable="TRUE">
+            <BoundingBox x="0" y="0" width="370" height="28"/>
             <DefaultProviderPolicy
+                defaultSystemProvider="EMPTY"
                 defaultSystemProviderType="SHORT_TEXT"
-                primaryProvider="com.dansemur.ironman/com.dansemur.ironman.complication.TestSuiteComplicationService"
+                primaryProvider="com.dansemur.ironman/.complication.TestSuiteComplicationService"
                 primaryProviderType="SHORT_TEXT"/>
 
             <!-- When Tests Active: Ranged Value Progress Bar -->
@@ -48,19 +55,18 @@
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
                     <Text align="START">
                         <Font family="dseg14_classic_bold_italic" size="16" color="#38BDF8">
-                            <Template>[COMPLICATION.TEXT]</Template>
+                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
                         </Font>
                     </Text>
                 </PartText>
                 <PartDraw x="125" y="6" width="120" height="12">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Stroke color="#38BDF8" thickness="1">
-                        <RoundRectangle cornerRadiusX="2" cornerRadiusY="2"/>
-                    </Stroke>
-                </PartDraw>
-                <PartDraw x="127" y="8" width="116" height="8">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <FilledRoundRectangle color="#38BDF8" cornerRadiusX="1" cornerRadiusY="1"/>
+                    <RoundRectangle x="0" y="0" width="120" height="12" cornerRadiusX="2" cornerRadiusY="2">
+                        <Stroke color="#38BDF8" thickness="1"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="2" y="2" width="116" height="8" cornerRadiusX="1" cornerRadiusY="1">
+                        <Fill color="#38BDF8"/>
+                    </RoundRectangle>
                 </PartDraw>
                 <PartText x="250" y="0" width="100" height="26">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
@@ -78,7 +84,7 @@
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
                     <Text align="CENTER">
                         <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#38BDF8">
-                            <Template>[COMPLICATION.TEXT]</Template>
+                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
                         </Font>
                     </Text>
                 </PartText>
@@ -179,9 +185,9 @@
         <PartDraw x="238" y="339" width="20" height="11">
             <Variant mode="AMBIENT" target="alpha" value="102"/>
             <!-- Outer Battery Shell -->
-            <Stroke color="#38BDF8" thickness="1.5">
-                <RoundRectangle cornerRadiusX="2" cornerRadiusY="2"/>
-            </Stroke>
+            <RoundRectangle x="0" y="0" width="20" height="11" cornerRadiusX="2" cornerRadiusY="2">
+                <Stroke color="#38BDF8" thickness="1.5"/>
+            </RoundRectangle>
             <!-- Battery Positive Terminal Nub -->
             <Rectangle x="19" y="3" width="2" height="5"><Fill color="#38BDF8"/></Rectangle>
             <!-- Dynamic Battery Fill Bars -->

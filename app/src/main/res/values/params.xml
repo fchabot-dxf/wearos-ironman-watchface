@@ -16,7 +16,8 @@
 
     <!-- Ambient / Idle Mode Colors -->
     <color name="param_ambient_bg">#000000</color>          <!-- Pure black OLED (0% battery drain) -->
-    <color name="param_ambient_glow">#38BDF8</color>        <!-- Luminescent Indiglo Cyan inverse glow -->
+    <color name="param_ambient_glow">#1D6280</color>        <!-- 50% soft dim Indiglo Cyan -->
+    <string name="param_ambient_brightness">50%</string>
 
     <!-- Strings & Labels -->
     <string name="param_banner_label">DEV DASHBOARD</string>

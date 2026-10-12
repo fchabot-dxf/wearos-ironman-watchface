@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA" />
+    <uses-permission android:name="com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA_PRIVILEGED" />
 
     <application
         android:allowBackup="true"
@@ -19,11 +21,11 @@
 
         <property
             android:name="com.google.wear.watchface.format.version"
-            android:value="1" />
+            android:value="2" />
 
         <meta-data
             android:name="com.google.android.wearable.watchface.format"
-            android:resource="@xml/watch_face" />
+            android:resource="@raw/watch_face" />
 
         <meta-data
             android:name="com.google.android.wearable.watchface.info"
@@ -33,6 +35,17 @@
         <receiver
             android:name="com.dansemur.ironman.ota.UpdateReceiver"
             android:exported="false" />
+
+        <!-- Complication Update Requester Receiver -->
+        <receiver
+            android:name="com.dansemur.ironman.complication.ComplicationUpdateReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.dansemur.ironman.TRIGGER_UPDATE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
 
         <!-- Live Progress Board / Test Suite Complication Data Source -->
         <service
@@ -49,7 +62,23 @@
                 android:value="RANGED_VALUE,SHORT_TEXT" />
             <meta-data
                 android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
-                android:value="60" />
+                android:value="300" />
+        </service>
+
+        <!-- Wear OS Tile: Latest Screenshot & Live Progress -->
+        <service
+            android:name="com.dansemur.ironman.tile.ProgressBoardTileService"
+            android:icon="@drawable/ic_launcher"
+            android:label="Progress Board"
+            android:description="@string/app_name"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/ic_launcher" />
         </service>
 
     </application>
