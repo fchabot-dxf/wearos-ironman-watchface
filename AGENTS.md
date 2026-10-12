@@ -123,5 +123,30 @@ Key requirements discovered for Wear OS Declarative Watch Face Runtime (DWF):
 10. **Mandatory `<UserConfigurations>` for On-Watch "Customize" Button:**
    - If `<UserConfigurations>` is missing from `<WatchFace>`, Wear OS evaluates the watch face as having zero customizable properties, which completely disables/hides the "Customize" (pencil) button in the watch face picker carousel. Adding `<UserConfigurations>` immediately restores the Customize button and opens access to the Complications editor tab.
 
+---
+
+## 7. Telemetry Layout, Icon Tinting & News Pageflip Architecture
+
+Key UX and runtime principles established for the Ironman HUD layout:
+
+1. **Activity Monitor Line (Tri-Pod HUD at `y=284`):**
+   - Combining Steps (`x=48..140`), Heart Rate (`x=182..257`), and Battery (`x=308..382`) into a single horizontal telemetry row frees up the entire lower hemisphere of the watch face.
+   - **Desaturated Icon Tints:** Full-saturation primaries look like candy; subtle tints desaturated against Indiglo Cyan (`#38BDF8`) preserve military instrumentation aesthetics:
+     - Steps Sole Icon: Soft Periwinkle / Lavender (`#818CF8`).
+     - Heart Icon: Soft Coral / Rose (`#F472B6`).
+     - Battery Shell & Bars: Soft Mint / Seafoam (`#5EEAD4`).
+     - Weather Condition (Sun): Golden Luminous Amber (`#FDE047`).
+     - Rain Droplet: Crystal Luminous Sky Blue (`#7DD3FC`).
+   - Digits across all pods remain in cohesive Indiglo Cyan 7-segment DSEG (`size="20"`).
+
+2. **Dedicated Lower Weather Station (`y=326..385`):**
+   - Left side: Giant 50pt DSEG current temperature with tinted weather condition icon.
+   - Right side: Forecast High (`↑`) and Low (`↓`) stacked vertically on top of each other, with precipitation chance (`💧`) positioned adjacent at `y=345`.
+
+3. **News Stream: Multi-Line Pageflip Architecture (Zero GPU Drain):**
+   - Rather than continuous vertical crawls that constantly wake the GPU compositor and chase the wearer's gaze, the stationary **Pageflip** pattern delivers double the narrative words (15–20 words per story across 3 lines) while resting at 0 FPS between flips.
+   - Timing: `([IS_AMBIENT] ? [MINUTE] : floor([SECOND] / 12)) % 6` holds each story for 12 seconds in interactive mode and updates once per minute in Ambient AOD.
+   - Font hierarchy: 15pt bold headline (topic) + two 13pt regular sublines (narrative story detail). Zero collision with the Date (`y=58`) or Time (`y=154`).
+
 
 
