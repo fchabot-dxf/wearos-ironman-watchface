@@ -1,10 +1,10 @@
 {
-  "versionCode": 5,
-  "versionName": "1.0.5",
+  "versionCode": 6,
+  "versionName": "1.0.6",
   "apkFile": "app-debug.apk",
-  "apkSize": 14979183,
-  "sha256": "3d6a11e9f0ac3c3261044f1f59481c4c182d929427c70948ad252b17155565c8",
-  "apkUrl": "https://github.com/fchabot-dxf/wearos-ironman-watchface/releases/download/v1.0.5/app-debug.apk",
-  "releaseNotes": "Release v1.0.5: Full interactive tap-through for Weather, Radar, News & Progress Board + ECCC Animated Radar & Black Tile Fix",
-  "timestamp": "2026-10-12T23:27:36.544341+00:00"
+  "apkSize": 14979543,
+  "sha256": "4a0ec3bc2e7ce8307eebdb03a270caad717584b2078fc80884b81aa99022bd6e",
+  "apkUrl": "https://github.com/fchabot-dxf/wearos-ironman-watchface/releases/download/v1.0.6/app-debug.apk",
+  "releaseNotes": "Release v1.0.6: 100% Edge-to-edge full screen radar view in WeatherRadarActivity",
+  "timestamp": "2026-10-12T23:36:32.658411+00:00"
 }
