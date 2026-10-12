@@ -72,92 +72,68 @@
             </Expressions>
             <!-- 0: Artemis Lunar Mission -->
             <Compare expression="h0">
-                <PartText x="15" y="96" width="420" height="20">
+                <PartText x="15" y="103" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#38BDF8"><Template>ARTEMIS III</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>ARTEMIS III · Mission lunaire de 4 astronautes</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="116" width="420" height="18">
+                <PartText x="15" y="126" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>Mission historique avec quatre astronautes pour 2026,</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="134" width="420" height="18">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>visant la recherche d'eau glacée au pôle Sud lunaire.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>visant l'eau glacée au pôle Sud pour 2026.</Template></Font></Text>
                 </PartText>
             </Compare>
             <!-- 1: Quantum Accelerator Sherbrooke -->
             <Compare expression="h1">
-                <PartText x="15" y="96" width="420" height="20">
+                <PartText x="15" y="103" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#38BDF8"><Template>ACCÉLÉRATEUR QUANTIQUE</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>QUANTIQUE · Nouveau hub d'innovation majeur</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="116" width="420" height="18">
+                <PartText x="15" y="126" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>Inauguration du hub d'innovation majeur à Sherbrooke,</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="134" width="420" height="18">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>propulsant le Québec en tête du calcul et physique avancée.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>à Sherbrooke propulsant la recherche avancée.</Template></Font></Text>
                 </PartText>
             </Compare>
             <!-- 2: Nuclear Fusion Record -->
             <Compare expression="h2">
-                <PartText x="15" y="96" width="420" height="20">
+                <PartText x="15" y="103" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#38BDF8"><Template>FUSION NUCLÉAIRE</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>FUSION · Nouveau record mondial d'énergie nette</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="116" width="420" height="18">
+                <PartText x="15" y="126" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>Nouveau record mondial de rendement énergétique net,</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="134" width="420" height="18">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>avec un plasma stable maintenu plus de six minutes.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>avec un plasma stable maintenu plus de 6 minutes.</Template></Font></Text>
                 </PartText>
             </Compare>
             <!-- 3: James Webb Primordial Galaxy -->
             <Compare expression="h3">
-                <PartText x="15" y="96" width="420" height="20">
+                <PartText x="15" y="103" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#38BDF8"><Template>TÉLESCOPE JAMES WEBB</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>JAMES WEBB · Découverte des premières galaxies</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="116" width="420" height="18">
+                <PartText x="15" y="126" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>Découverte des toutes premières galaxies de l'Univers,</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="134" width="420" height="18">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>formées à peine 300 millions d'années après le Big Bang.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>formées 300 millions d'années après le Big Bang.</Template></Font></Text>
                 </PartText>
             </Compare>
             <!-- 4: Hydro-Québec Clean Wind Energy -->
             <Compare expression="h4">
-                <PartText x="15" y="96" width="420" height="20">
+                <PartText x="15" y="103" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#38BDF8"><Template>HYDRO-QUÉBEC</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>HYDRO-QUÉBEC · Mégaparc éolien de 3000 MW</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="116" width="420" height="18">
+                <PartText x="15" y="126" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>Déploiement d'un mégaparc éolien de 3000 mégawatts,</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="134" width="420" height="18">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>pour accélérer la transition énergétique et décarbonation.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>déployé pour accélérer la transition énergétique.</Template></Font></Text>
                 </PartText>
             </Compare>
             <!-- Default (5): AI Montreal Leadership -->
             <Default>
-                <PartText x="15" y="96" width="420" height="20">
+                <PartText x="15" y="103" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="#38BDF8"><Template>INTELLIGENCE ARTIFICIELLE</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>IA MONTRÉAL · Pôle d'innovation mondial</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="116" width="420" height="18">
+                <PartText x="15" y="126" width="420" height="22">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>Montréal renforce son statut de pôle mondial de recherche,</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="134" width="420" height="18">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#38BDF8"><Template>avec de nouveaux laboratoires en algorithmes avancés.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL" color="#38BDF8"><Template>avec de nouveaux laboratoires d'algorithmes avancés.</Template></Font></Text>
                 </PartText>
             </Default>
         </Condition>
