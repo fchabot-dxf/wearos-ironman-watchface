@@ -1,10 +1,10 @@
 {
-  "versionCode": 2,
-  "versionName": "1.0.2",
+  "versionCode": 3,
+  "versionName": "1.0.3",
   "apkFile": "app-debug.apk",
-  "apkSize": 14785702,
-  "sha256": "d2d0efd58cc308c96634f2b0d31506c10c23fd4b1fd91d6ee9f34975b2501a55",
-  "apkUrl": "https://github.com/fchabot-dxf/wearos-ironman-watchface/releases/download/v1.0.2/app-debug.apk",
-  "releaseNotes": "Cycling Option A (18pt 2 lines) and Option B (15pt 3 lines) every 12s",
-  "timestamp": "2026-10-12T15:13:32.005207+00:00"
+  "apkSize": 14830215,
+  "sha256": "faccf6bc907e4ed4b416250c1243141126cc953d696bd7849d31d89425a93d26",
+  "apkUrl": "https://github.com/fchabot-dxf/wearos-ironman-watchface/releases/download/v1.0.3/app-debug.apk",
+  "releaseNotes": "Release v1.0.3: Live Weather Radar & Prevision Cards, 3 Wear OS Tiles",
+  "timestamp": "2026-10-12T21:43:36.769352+00:00"
 }
