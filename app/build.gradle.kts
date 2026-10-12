@@ -11,8 +11,8 @@ android {
         applicationId = "com.dansemur.ironman"
         minSdk = 33 // Wear OS 4+ (supports Watch Face Format natively)
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.2"
     }
 
     buildTypes {
