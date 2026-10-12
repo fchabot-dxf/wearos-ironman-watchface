@@ -61,18 +61,31 @@ Configured in [`gradle/libs.versions.toml`](gradle/libs.versions.toml):
 
 ---
 
-## 4. Development & Testing Commands
+## 4. Development, Testing & OTA Deployment Commands
 
 - **Build APK:**
   ```powershell
   ./gradlew assembleDebug
   ```
-- **Install on Watch via Wireless ADB:**
+- **Automated OTA Release Pipeline (Hands-Free):**
+  ```powershell
+  python tools/ota_deploy.py
+  ```
+  *(Bumps versionCode, builds debug APK, updates ota_manifest.json, and publishes to GitHub Releases via `gh`)*.
+- **Initial Install on Watch via Wireless ADB:**
   ```powershell
   adb connect <WATCH_IP>:5555
   adb install -r app/build/outputs/apk/debug/app-debug.apk
   ```
-- **Inspect Complication Logcat:**
+- **Inspect Complication & OTA Logcat:**
   ```powershell
-  adb logcat -s "TestSuiteComplication" "TestSuiteTile"
+  adb logcat -s "TestSuiteComplication" "TestSuiteTile" "SilentSelfUpdater"
   ```
+
+---
+
+## 5. In-App Silent OTA Self-Updater Architecture
+See full contract and Kotlin implementation blueprint in [`OTA_HARNESS_SPEC.md`](OTA_HARNESS_SPEC.md).
+- **Zero-Touch on Phone & Watch:** Uses Android 12+ (API 31+) `PackageInstaller.SessionParams.USER_ACTION_NOT_REQUIRED`.
+- **Pipeline:** [`tools/ota_deploy.py`](tools/ota_deploy.py) produces releases and manifests.
+- **Harness:** Watch polls or checks on launch; streams APK into `PackageInstaller.Session` and commits silently.

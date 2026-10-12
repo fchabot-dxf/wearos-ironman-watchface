@@ -7,6 +7,7 @@
     <!-- Active Mode Colors -->
     <color name="param_active_lcd_bg">#CAD5BE</color>       <!-- Vintage LCD tint -->
     <color name="param_active_digits">#0F172A</color>       <!-- Dark segmented LCD digits -->
+    <color name="param_ghost_digits">#BAC4AC</color>        <!-- Faint 10% unlit LCD ghost segments -->
     <color name="param_active_accent_ring">#EA580C</color>  <!-- Iconic Ironman Orange ring -->
     <color name="param_active_banner_text">#0284C7</color>  <!-- Header text color -->
     <color name="param_bezel_casing">#1E2022</color>        <!-- Dark matte outer bezel -->
@@ -29,4 +30,9 @@
     <string name="tile_name">Test Suite Status</string>
     <string name="tile_description">Displays automated test suite progress and statistics</string>
     <string name="complication_provider_name">Test Suite Status</string>
+
+    <!-- Test Progress Strip Defaults -->
+    <string name="param_progress_project">BSPLINE</string>
+    <string name="param_progress_eta">-4M</string>
+    <string name="param_progress_pct">84%</string>
 </resources>

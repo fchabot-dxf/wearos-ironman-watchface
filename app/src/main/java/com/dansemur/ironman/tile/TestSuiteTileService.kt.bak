@@ -1,0 +1,99 @@
+package com.dansemur.ironman.tile
+
+import androidx.wear.tiles.ColorBuilders.argb
+import androidx.wear.tiles.DimensionBuilders.dp
+import androidx.wear.tiles.DimensionBuilders.expand
+import androidx.wear.tiles.DimensionBuilders.sp
+import androidx.wear.tiles.LayoutElementBuilders
+import androidx.wear.tiles.RequestBuilders
+import androidx.wear.tiles.ResourceBuilders
+import androidx.wear.tiles.TileBuilders
+import androidx.wear.tiles.TileService
+import androidx.wear.tiles.TimelineBuilders
+import com.google.common.util.concurrent.Futures
+import com.google.common.util.concurrent.ListenableFuture
+
+/**
+ * TestSuiteTileService
+ *
+ * Full swipeable dashboard card showing automated test status.
+ */
+class TestSuiteTileService : TileService() {
+
+    override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
+        val passed = 48
+        val total = 50
+        val percent = 96
+        val suiteName = "DEV TEST SUITE"
+
+        val rootColumn = LayoutElementBuilders.Column.Builder()
+            .setWidth(expand())
+            .setHorizontalAlignment(LayoutElementBuilders.HORIZONTAL_ALIGN_CENTER)
+            .addContent(
+                LayoutElementBuilders.Text.Builder()
+                    .setText(suiteName)
+                    .setFontStyle(LayoutElementBuilders.FontStyle.Builder().setSize(sp(14f)).build())
+                    .setFontStyles(LayoutElementBuilders.FontStyles.Builder().build())
+                    .setColor(argb(0xFF94A3B8.toInt()))
+                    .build()
+            )
+            .addContent(
+                LayoutElementBuilders.Spacer.Builder().setHeight(dp(6f)).build()
+            )
+            .addContent(
+                LayoutElementBuilders.Text.Builder()
+                    .setText("$percent%")
+                    .setFontStyle(LayoutElementBuilders.FontStyle.Builder().setSize(sp(34f)).build())
+                    .setColor(argb(0xFF38BDF8.toInt()))
+                    .build()
+            )
+            .addContent(
+                LayoutElementBuilders.Spacer.Builder().setHeight(dp(4f)).build()
+            )
+            .addContent(
+                LayoutElementBuilders.Text.Builder()
+                    .setText("$passed / $total Passed")
+                    .setFontStyle(LayoutElementBuilders.FontStyle.Builder().setSize(sp(16f)).build())
+                    .setColor(argb(0xFFF8FAFC.toInt()))
+                    .build()
+            )
+            .addContent(
+                LayoutElementBuilders.Spacer.Builder().setHeight(dp(6f)).build()
+            )
+            .addContent(
+                LayoutElementBuilders.Text.Builder()
+                    .setText("Status: ALL PASS")
+                    .setFontStyle(LayoutElementBuilders.FontStyle.Builder().setSize(sp(12f)).build())
+                    .setColor(argb(0xFF22C55E.toInt()))
+                    .build()
+            )
+            .build()
+
+        val tile = TileBuilders.Tile.Builder()
+            .setResourcesVersion("1")
+            .setTimeline(
+                TimelineBuilders.Timeline.Builder()
+                    .addTimelineEntry(
+                        TimelineBuilders.TimelineEntry.Builder()
+                            .setLayout(
+                                LayoutElementBuilders.Layout.Builder()
+                                    .setRoot(rootColumn)
+                                    .build()
+                            )
+                            .build()
+                    )
+                    .build()
+            )
+            .setFreshnessIntervalMillis(60_000)
+            .build()
+
+        return Futures.immediateFuture(tile)
+    }
+
+    override fun onTileResourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ListenableFuture<ResourceBuilders.Resources> {
+        val resources = ResourceBuilders.Resources.Builder()
+            .setVersion("1")
+            .build()
+        return Futures.immediateFuture(resources)
+    }
+}

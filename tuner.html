@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Timex Ironman UI Visual Tuner</title>
+<style>
+  @font-face {
+    font-family: 'DSEG14';
+    src: url('app/src/main/res/font/dseg14_classic_bold_italic.ttf') format('truetype');
+  }
+  body {
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 24px;
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .preview-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #1e293b;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  }
+  canvas {
+    background: #000;
+    border-radius: 50%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  }
+  .controls-card {
+    background: #1e293b;
+    padding: 24px;
+    border-radius: 16px;
+    width: 380px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  }
+  h2 { margin-top: 0; font-size: 1.25rem; color: #f97316; }
+  .control-group {
+    margin-bottom: 16px;
+  }
+  .control-group label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-bottom: 6px;
+  }
+  .control-group label span.val {
+    color: #38bdf8;
+    font-weight: bold;
+  }
+  input[type="range"] {
+    width: 100%;
+    accent-color: #ea580c;
+  }
+  input[type="color"] {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+  .btn-row {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  button {
+    flex: 1;
+    background: #ea580c;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  button:hover {
+    background: #c2410c;
+  }
+  textarea {
+    width: 100%;
+    height: 110px;
+    margin-top: 14px;
+    background: #090d16;
+    color: #38bdf8;
+    font-family: monospace;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #334155;
+    padding: 8px;
+    box-sizing: border-box;
+    resize: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-card">
+  <h2>Live Circular Preview (450x450)</h2>
+  <canvas id="watchCanvas" width="450" height="450"></canvas>
+  <p style="color: #64748b; font-size: 0.8rem; margin-top: 12px;">Pixel Watch 45mm Format</p>
+</div>
+
+<div class="controls-card">
+  <h2>UI Sliders & Colors</h2>
+
+  <div class="control-group">
+    <label>Main Time Vertical Position (Y): <span class="val" id="valTimeY">255</span></label>
+    <input type="range" id="timeY" min="150" max="350" value="255">
+  </div>
+
+  <div class="control-group">
+    <label>Main Time Font Size: <span class="val" id="valTimeSize">104</span></label>
+    <input type="range" id="timeSize" min="70" max="140" value="104">
+  </div>
+
+  <div class="control-group">
+    <label>Date Vertical Position (Y): <span class="val" id="valDateY">115</span></label>
+    <input type="range" id="dateY" min="60" max="180" value="115">
+  </div>
+
+  <div class="control-group">
+    <label>Date Font Size: <span class="val" id="valDateSize">36</span></label>
+    <input type="range" id="dateSize" min="20" max="55" value="36">
+  </div>
+
+  <div class="control-group">
+    <label>Divider Line Vertical (Y): <span class="val" id="valLineY">145</span></label>
+    <input type="range" id="lineY" min="100" max="220" value="145">
+  </div>
+
+  <div class="control-group" style="display:flex; justify-content:space-between; align-items:center;">
+    <label style="margin:0;">LCD Dial Tint: <input type="color" id="lcdColor" value="#CAD5BE"></label>
+    <label style="margin:0;">Accent Ring: <input type="color" id="accentColor" value="#EA580C"></label>
+    <label style="margin:0;">Digits Color: <input type="color" id="digitColor" value="#0F172A"></label>
+  </div>
+
+  <div class="btn-row">
+    <button onclick="copyXml()">Copy XML Values</button>
+  </div>
+
+  <textarea id="xmlOutput" readonly></textarea>
+</div>
+
+<script>
+const canvas = document.getElementById('watchCanvas');
+const ctx = canvas.getContext('2d');
+
+const inputs = {
+  timeY: document.getElementById('timeY'),
+  timeSize: document.getElementById('timeSize'),
+  dateY: document.getElementById('dateY'),
+  dateSize: document.getElementById('dateSize'),
+  lineY: document.getElementById('lineY'),
+  lcdColor: document.getElementById('lcdColor'),
+  accentColor: document.getElementById('accentColor'),
+  digitColor: document.getElementById('digitColor')
+};
+
+function render() {
+  const tY = parseInt(inputs.timeY.value);
+  const tSize = parseInt(inputs.timeSize.value);
+  const dY = parseInt(inputs.dateY.value);
+  const dSize = parseInt(inputs.dateSize.value);
+  const lY = parseInt(inputs.lineY.value);
+  const lcdBg = inputs.lcdColor.value;
+  const accent = inputs.accentColor.value;
+  const digits = inputs.digitColor.value;
+
+  document.getElementById('valTimeY').innerText = tY;
+  document.getElementById('valTimeSize').innerText = tSize;
+  document.getElementById('valDateY').innerText = dY;
+  document.getElementById('valDateSize').innerText = dSize;
+  document.getElementById('valLineY').innerText = lY;
+
+  ctx.clearRect(0, 0, 450, 450);
+
+  // Outer bezel
+  ctx.beginPath();
+  ctx.arc(225, 225, 215, 0, Math.PI * 2);
+  ctx.strokeStyle = '#1E2022';
+  ctx.lineWidth = 20;
+  ctx.stroke();
+
+  // Orange accent ring
+  ctx.beginPath();
+  ctx.arc(225, 225, 205, 0, Math.PI * 2);
+  ctx.strokeStyle = accent;
+  ctx.lineWidth = 4;
+  ctx.stroke();
+
+  // LCD dial
+  ctx.beginPath();
+  ctx.arc(225, 225, 201, 0, Math.PI * 2);
+  ctx.fillStyle = lcdBg;
+  ctx.fill();
+  ctx.strokeStyle = '#1E2022';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Line
+  ctx.beginPath();
+  ctx.moveTo(55, lY);
+  ctx.lineTo(395, lY);
+  ctx.strokeStyle = '#849377';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Date
+  ctx.fillStyle = digits;
+  ctx.font = `bold italic ${dSize}px 'DSEG14', monospace`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('SUN 10.11', 225, dY);
+
+  // Main Time
+  ctx.font = `bold italic ${tSize}px 'DSEG14', monospace`;
+  ctx.fillText('21:37', 225, tY);
+
+  // XML export
+  const partTextDateY = dY - Math.round(dSize * 0.8);
+  const partTextTimeY = tY - Math.round(tSize * 0.7);
+
+  document.getElementById('xmlOutput').value =
+`<!-- Top Date -->
+<PartText x="50" y="${partTextDateY}" width="350" height="${dSize + 20}">
+    <Text align="CENTER">
+        <Font family="dseg14_classic_bold_italic" size="${dSize}" color="${digits}">
+...
+<!-- Main Time -->
+<PartText x="35" y="${partTextTimeY}" width="380" height="${tSize + 40}">
+    <Text align="CENTER">
+        <Font family="dseg14_classic_bold_italic" size="${tSize}" color="${digits}">`;
+}
+
+Object.values(inputs).forEach(el => el.addEventListener('input', render));
+
+document.fonts.ready.then(() => render());
+
+function copyXml() {
+  const ta = document.getElementById('xmlOutput');
+  ta.select();
+  navigator.clipboard.writeText(ta.value);
+  alert('Copied XML snippet to clipboard!');
+}
+</script>
+</body>
+</html>

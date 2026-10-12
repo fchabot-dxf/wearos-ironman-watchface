@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.dansemur.ironman"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.dansemur.ironman"
         minSdk = 33 // Wear OS 4+ (supports Watch Face Format natively)
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
     }
