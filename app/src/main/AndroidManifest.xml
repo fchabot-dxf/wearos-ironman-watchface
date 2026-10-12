@@ -19,6 +19,18 @@
         android:hasCode="true"
         android:supportsRtl="true">
 
+        <!-- Full-Screen Interactive Weather & Live Radar App -->
+        <activity
+            android:name="com.dansemur.ironman.ui.WeatherRadarActivity"
+            android:exported="true"
+            android:label="Météo &amp; Radar"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <property
             android:name="com.google.wear.watchface.format.version"
             android:value="2" />
@@ -71,6 +83,54 @@
             android:icon="@drawable/ic_launcher"
             android:label="Progress Board"
             android:description="@string/app_name"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/ic_launcher" />
+        </service>
+
+        <!-- Wear OS Tile 1: Prévisions & Météo GEM -->
+        <service
+            android:name="com.dansemur.ironman.tile.PrevisionsTileService"
+            android:icon="@drawable/ic_launcher"
+            android:label="Prévisions Météo"
+            android:description="@string/tile_previsions_desc"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/ic_launcher" />
+        </service>
+
+        <!-- Wear OS Tile 2: Radar Pluie Direct -->
+        <service
+            android:name="com.dansemur.ironman.tile.RadarTileService"
+            android:icon="@drawable/ic_launcher"
+            android:label="Radar Pluie Direct"
+            android:description="@string/tile_radar_desc"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/ic_launcher" />
+        </service>
+
+        <!-- Wear OS Tile 3: Fil de Nouvelles -->
+        <service
+            android:name="com.dansemur.ironman.tile.NewsTileService"
+            android:icon="@drawable/ic_launcher"
+            android:label="Fil de Nouvelles"
+            android:description="@string/tile_news_desc"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
             android:exported="true">
             <intent-filter>

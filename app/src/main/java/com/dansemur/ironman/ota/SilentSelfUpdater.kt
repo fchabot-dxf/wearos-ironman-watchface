@@ -25,7 +25,7 @@ import java.security.MessageDigest
 object SilentSelfUpdater {
 
     private const val TAG = "SilentSelfUpdater"
-    private const val DEFAULT_MANIFEST_URL = "https://progress-board.dansemur.workers.dev/watch/ota"
+    private const val DEFAULT_MANIFEST_URL = "https://raw.githubusercontent.com/fchabot-dxf/wearos-ironman-watchface/main/ota_manifest.json"
 
     data class OtaManifest(
         val versionCode: Int,
@@ -66,14 +66,36 @@ object SilentSelfUpdater {
         }
     }
 
-    private fun fetchManifest(urlString: String): OtaManifest? {
-        return try {
-            val url = URL(urlString)
-            val conn = (url.openConnection() as HttpURLConnection).apply {
-                connectTimeout = 5000
-                readTimeout = 5000
+    private fun openConnectionWithRedirects(urlString: String, timeoutMs: Int = 15000): HttpURLConnection {
+        var currentUrl = urlString
+        var redirectCount = 0
+        while (redirectCount < 8) {
+            val conn = (URL(currentUrl).openConnection() as HttpURLConnection).apply {
+                connectTimeout = timeoutMs
+                readTimeout = 30000
+                instanceFollowRedirects = true
                 setRequestProperty("User-Agent", "IronmanWearOS/1.0")
             }
+            val status = conn.responseCode
+            if (status in 300..399) {
+                val newUrl = conn.getHeaderField("Location") ?: break
+                conn.disconnect()
+                currentUrl = newUrl
+                redirectCount++
+                continue
+            }
+            return conn
+        }
+        return (URL(currentUrl).openConnection() as HttpURLConnection).apply {
+            connectTimeout = timeoutMs
+            readTimeout = 30000
+            setRequestProperty("User-Agent", "IronmanWearOS/1.0")
+        }
+    }
+
+    private fun fetchManifest(urlString: String): OtaManifest? {
+        return try {
+            val conn = openConnectionWithRedirects(urlString, timeoutMs = 8000)
             if (conn.responseCode == 200) {
                 val body = conn.inputStream.bufferedReader().use { it.readText() }
                 val json = JSONObject(body)
@@ -85,6 +107,7 @@ object SilentSelfUpdater {
                     releaseNotes = json.optString("releaseNotes", null)
                 )
             } else {
+                Log.w(TAG, "Manifest fetch returned HTTP ${conn.responseCode}")
                 null
             }
         } catch (e: Exception) {
@@ -109,13 +132,7 @@ object SilentSelfUpdater {
             sessionId = packageInstaller.createSession(params)
             val session = packageInstaller.openSession(sessionId)
 
-            val url = URL(manifest.apkUrl)
-            val conn = (url.openConnection() as HttpURLConnection).apply {
-                connectTimeout = 10000
-                readTimeout = 30000
-                setRequestProperty("User-Agent", "IronmanWearOS/1.0")
-            }
-
+            val conn = openConnectionWithRedirects(manifest.apkUrl, timeoutMs = 15000)
             val contentLength = conn.contentLengthLong
 
             conn.inputStream.use { input ->

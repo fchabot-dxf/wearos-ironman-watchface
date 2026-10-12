@@ -24,4 +24,9 @@
     <string name="setting_lcd_background">LCD Background Tint</string>
     <string name="lcd_classic_green">Vintage LCD Tint</string>
     <string name="lcd_pure_black">Pure Black OLED</string>
+
+    <!-- Tile descriptions -->
+    <string name="tile_previsions_desc">Prévisions météo en direct Environnement Canada</string>
+    <string name="tile_radar_desc">Radar de pluie en temps réel GeoMet</string>
+    <string name="tile_news_desc">Fil de nouvelles en direct</string>
 </resources>

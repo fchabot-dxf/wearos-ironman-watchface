@@ -36,4 +36,7 @@
     <string name="param_progress_project">BSPLINE</string>
     <string name="param_progress_eta">-4M</string>
     <string name="param_progress_pct">84%</string>
+
+    <!-- News Layout: '2liner' (22pt, 2 lines) or '3liner' (19pt, 3 lines) -->
+    <string name="param_news_layout">2liner</string>
 </resources>

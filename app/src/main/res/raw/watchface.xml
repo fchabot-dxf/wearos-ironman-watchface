@@ -70,70 +70,82 @@
                 <Expression name="h3"><![CDATA[([IS_AMBIENT] ? [MINUTE] : floor([SECOND] / 12)) % 6 == 3]]></Expression>
                 <Expression name="h4"><![CDATA[([IS_AMBIENT] ? [MINUTE] : floor([SECOND] / 12)) % 6 == 4]]></Expression>
             </Expressions>
-            <!-- 0: Artemis Lunar Mission -->
+            <!-- Slot 0: Option A (2 lines @ 22pt) - Artemis -->
             <Compare expression="h0">
-                <PartText x="15" y="104" width="420" height="24">
+                <PartText x="15" y="104" width="420" height="32">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>ARTEMIS III · Mission lunaire de 4 astronautes</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>ARTEMIS III · Mission 2026</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="131" width="420" height="24">
+                <PartText x="15" y="136" width="420" height="32">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>visant l'eau glacée au pôle Sud pour 2026.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>4 astronautes vers le pôle Sud.</Template></Font></Text>
                 </PartText>
             </Compare>
-            <!-- 1: Quantum Accelerator Sherbrooke -->
+            <!-- Slot 1: Option B (3 lines @ 19pt) - Artemis Continuous -->
             <Compare expression="h1">
-                <PartText x="15" y="104" width="420" height="24">
+                <PartText x="15" y="97" width="420" height="25">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>QUANTIQUE · Nouveau hub d'innovation majeur</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>ARTEMIS III · Mission lunaire 2026</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="131" width="420" height="24">
+                <PartText x="15" y="122" width="420" height="25">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>à Sherbrooke propulsant la recherche avancée.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>Quatre astronautes vers le pôle Sud,</Template></Font></Text>
+                </PartText>
+                <PartText x="15" y="147" width="420" height="25">
+                    <Variant mode="AMBIENT" target="alpha" value="102"/>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>recherche d'eau glacée permanente.</Template></Font></Text>
                 </PartText>
             </Compare>
-            <!-- 2: Nuclear Fusion Record -->
+            <!-- Slot 2: Option A (2 lines @ 22pt) - Quantique -->
             <Compare expression="h2">
-                <PartText x="15" y="104" width="420" height="24">
+                <PartText x="15" y="104" width="420" height="32">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>FUSION · Nouveau record mondial d'énergie nette</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>QUANTIQUE · Hub de Sherbrooke</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="131" width="420" height="24">
+                <PartText x="15" y="136" width="420" height="32">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>avec un plasma stable maintenu plus de 6 minutes.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>Pôle d'excellence en calcul avancé.</Template></Font></Text>
                 </PartText>
             </Compare>
-            <!-- 3: James Webb Primordial Galaxy -->
+            <!-- Slot 3: Option B (3 lines @ 19pt) - Quantique Continuous -->
             <Compare expression="h3">
-                <PartText x="15" y="104" width="420" height="24">
+                <PartText x="15" y="97" width="420" height="25">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>JAMES WEBB · Découverte des premières galaxies</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>QUANTIQUE · Hub d'innovation majeur</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="131" width="420" height="24">
+                <PartText x="15" y="122" width="420" height="25">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>formées 300 millions d'années après le Big Bang.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>Le Québec propulsé en tête mondiale</Template></Font></Text>
+                </PartText>
+                <PartText x="15" y="147" width="420" height="25">
+                    <Variant mode="AMBIENT" target="alpha" value="102"/>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>du calcul et de la physique avancée.</Template></Font></Text>
                 </PartText>
             </Compare>
-            <!-- 4: Hydro-Québec Clean Wind Energy -->
+            <!-- Slot 4: Option A (2 lines @ 22pt) - Fusion -->
             <Compare expression="h4">
-                <PartText x="15" y="104" width="420" height="24">
+                <PartText x="15" y="104" width="420" height="32">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>HYDRO-QUÉBEC · Mégaparc éolien de 3000 MW</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>FUSION · Record mondial net</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="131" width="420" height="24">
+                <PartText x="15" y="136" width="420" height="32">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>déployé pour accélérer la transition énergétique.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>Plasma stable de six minutes.</Template></Font></Text>
                 </PartText>
             </Compare>
-            <!-- Default (5): AI Montreal Leadership -->
+            <!-- Slot 5: Option B (3 lines @ 19pt) - Fusion Continuous -->
             <Default>
-                <PartText x="15" y="104" width="420" height="24">
+                <PartText x="15" y="97" width="420" height="25">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>IA MONTRÉAL · Pôle d'innovation mondial</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>FUSION · Nouveau record mondial net</Template></Font></Text>
                 </PartText>
-                <PartText x="15" y="131" width="420" height="24">
+                <PartText x="15" y="122" width="420" height="25">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="16" weight="NORMAL" color="#38BDF8"><Template>avec de nouveaux laboratoires d'algorithmes avancés.</Template></Font></Text>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>Plasma stable maintenu six minutes,</Template></Font></Text>
+                </PartText>
+                <PartText x="15" y="147" width="420" height="25">
+                    <Variant mode="AMBIENT" target="alpha" value="102"/>
+                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>percée vers une énergie propre infinie.</Template></Font></Text>
                 </PartText>
             </Default>
         </Condition>
