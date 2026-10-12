@@ -1,10 +1,10 @@
 {
-  "versionCode": 7,
-  "versionName": "1.0.7",
+  "versionCode": 8,
+  "versionName": "1.0.8",
   "apkFile": "app-debug.apk",
-  "apkSize": 14971571,
-  "sha256": "dc4694664b44ae2e693b988578365f70599eac0ad76b000ae62f2fe896714f82",
-  "apkUrl": "https://github.com/fchabot-dxf/wearos-ironman-watchface/releases/download/v1.0.7/app-debug.apk",
-  "releaseNotes": "Release v1.0.7: High-resolution tight zoom 10 radar crop on Montreal",
-  "timestamp": "2026-10-12T23:41:03.925541+00:00"
+  "apkSize": 15151822,
+  "sha256": "b4c2d7446e87488f4505ee9d40615df8107a7b2230408f5858e65f6e2acde2ec",
+  "apkUrl": "https://github.com/fchabot-dxf/wearos-ironman-watchface/releases/download/v1.0.8/app-debug.apk",
+  "releaseNotes": "Release v1.0.8: Centered home crop on watch position with blue indicator dot",
+  "timestamp": "2026-10-12T23:46:30.089793+00:00"
 }
