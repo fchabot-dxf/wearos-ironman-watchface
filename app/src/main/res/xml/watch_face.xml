@@ -1,0 +1,96 @@
+<WatchFace width="450" height="450" clipShape="CIRCLE">
+    <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
+    <Metadata key="PREVIEW_TIME" value="10:09:36"/>
+
+    <!-- ======================================================== -->
+    <!-- SCENE                                                    -->
+    <!-- Pure circular Timex Ironman watch face                   -->
+    <!-- ======================================================== -->
+    <Scene backgroundColor="#000000">
+
+        <!-- Outer Matte Industrial Bezel -->
+        <PartDraw x="0" y="0" width="450" height="450">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <Ellipse x="0" y="0" width="450" height="450">
+                <Stroke color="#1E2022" thickness="20"/>
+            </Ellipse>
+
+            <!-- Circular Accent Ring (Iconic Orange) -->
+            <Ellipse x="18" y="18" width="414" height="414">
+                <Stroke color="#EA580C" thickness="4"/>
+            </Ellipse>
+
+            <!-- Circular Vintage LCD Dial (Pure Circle) -->
+            <Ellipse x="24" y="24" width="402" height="402">
+                <Fill color="#CAD5BE"/>
+                <Stroke color="#1E2022" thickness="2"/>
+            </Ellipse>
+
+            <!-- Inner Separator Line -->
+            <Line startX="60" startY="150" endX="390" endY="150">
+                <Stroke color="#849377" thickness="2"/>
+            </Line>
+        </PartDraw>
+
+        <!-- Top Header Banner Label -->
+        <PartText x="75" y="65" width="300" height="30">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="14" weight="BOLD" color="#0284C7">
+                    <Template>DEV DASHBOARD</Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- ROW 1: DAY OF WEEK + DATE -->
+        <PartText x="75" y="105" width="300" height="40">
+            <Text align="START">
+                <Font family="MONOSPACE" size="26" weight="BOLD" color="#0F172A">
+                    <Variant mode="AMBIENT" target="color" value="#38BDF8"/>
+                    <Template>%1$s %2$02d.%3$02d<Parameter expression="[DAY_OF_WEEK_S]"/><Parameter expression="[MONTH]"/><Parameter expression="[DAY]"/></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- Status indicator in Active mode -->
+        <PartText x="250" y="165" width="130" height="30">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <Text align="END">
+                <Font family="MONOSPACE" size="16" weight="BOLD" color="#0284C7">
+                    <Template>PW: PASS</Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- MAIN DIGITAL TIME (Hours : Minutes) -->
+        <PartText x="50" y="215" width="235" height="110">
+            <Text align="END">
+                <Font family="MONOSPACE" size="84" weight="BOLD" color="#0F172A">
+                    <Variant mode="AMBIENT" target="color" value="#38BDF8"/>
+                    <Template>%1$02d:%2$02d<Parameter expression="[HOUR_0_23]"/><Parameter expression="[MINUTE]"/></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- Seconds Display (.SS) (hidden in Ambient mode to save battery) -->
+        <PartText x="290" y="242" width="100" height="70">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <Text align="START">
+                <Font family="MONOSPACE" size="44" weight="BOLD" color="#0F172A">
+                    <Template>.%1$02d<Parameter expression="[SECOND]"/></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- Bottom Sub-Label -->
+        <PartText x="75" y="360" width="300" height="30">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="12" weight="BOLD" color="#94A3B8">
+                    <Template>WATER RESISTANT 100M</Template>
+                </Font>
+            </Text>
+        </PartText>
+
+    </Scene>
+</WatchFace>
