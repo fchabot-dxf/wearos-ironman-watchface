@@ -15,6 +15,8 @@ import androidx.core.view.InputDeviceCompat
 import androidx.core.view.MotionEventCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -171,6 +173,21 @@ class WeatherRadarActivity : Activity() {
         }
         radarBaseMap.setImageResource(basemapRes)
         loadRadarData(zoom)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Resume animation when wrist wakes and activity becomes visible
+        if (frameList.isNotEmpty() && !isPaused) {
+            startRadarAnimation()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        // Battery conservation: kill animation and timer coroutines immediately when display turns off or ambient kicks in
+        animationJob?.cancel()
+        manualScrubJob?.cancel()
     }
 
     override fun onDestroy() {
@@ -332,27 +349,35 @@ class WeatherRadarActivity : Activity() {
                     val json = JSONObject(body)
                     val arr = json.optJSONArray("frames")
                     if (arr != null && arr.length() > 0) {
-                        val downloaded = mutableListOf<RadarFrame>()
-                        for (i in 0 until arr.length()) {
-                            val f = arr.getJSONObject(i)
-                            val timeStr = f.optString("time", "")
-                            val relStr = f.optString("relative", "")
-                            val deltaMins = f.optInt("deltaMins", 0)
-                            val tileUrl = f.optString("tileUrl", "")
-                            try {
-                                val tConn = URL(tileUrl).openConnection() as HttpURLConnection
-                                tConn.setRequestProperty("User-Agent", "IronmanWatch/1.0 (Android; WearOS)")
-                                tConn.connectTimeout = 4000
-                                tConn.readTimeout = 4000
-                                if (tConn.responseCode == 200) {
-                                    val b = tConn.inputStream.use { it.readBytes() }
-                                    val bmp = BitmapFactory.decodeByteArray(b, 0, b.size)
-                                    if (bmp != null) {
-                                        downloaded.add(RadarFrame(timeStr, relStr, deltaMins, bmp))
+                        val deferredFrames = (0 until arr.length()).map { i ->
+                            async(Dispatchers.IO) {
+                                val f = arr.getJSONObject(i)
+                                val timeStr = f.optString("time", "")
+                                val relStr = f.optString("relative", "")
+                                val deltaMins = f.optInt("deltaMins", 0)
+                                val tileUrl = f.optString("tileUrl", "")
+                                try {
+                                    val tConn = URL(tileUrl).openConnection() as HttpURLConnection
+                                    tConn.setRequestProperty("User-Agent", "IronmanWatch/1.0 (Android; WearOS)")
+                                    tConn.connectTimeout = 4000
+                                    tConn.readTimeout = 4000
+                                    if (tConn.responseCode == 200) {
+                                        val bytes = tConn.inputStream.use { it.readBytes() }
+                                        // Battery & RAM optimization: decode in RGB_565 to cut RAM/GPU memory in half
+                                        val opts = BitmapFactory.Options().apply {
+                                            inPreferredConfig = android.graphics.Bitmap.Config.RGB_565
+                                        }
+                                        val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, opts)
+                                        if (bmp != null) {
+                                            return@async RadarFrame(timeStr, relStr, deltaMins, bmp)
+                                        }
                                     }
-                                }
-                            } catch (_: Exception) {}
+                                } catch (_: Exception) {}
+                                null
+                            }
                         }
+
+                        val downloaded = deferredFrames.awaitAll().filterNotNull()
                         if (downloaded.isNotEmpty()) {
                             withContext(Dispatchers.Main) {
                                 frameList.clear()

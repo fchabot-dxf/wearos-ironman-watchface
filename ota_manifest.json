@@ -1,9 +1,9 @@
 {
-  "versionCode": 12,
-  "versionName": "1.0.12",
+  "versionCode": 13,
+  "versionName": "1.0.13",
   "apkFile": "app-debug.apk",
-  "apkSize": 16218182,
-  "sha256": "8df11db09cf34e82a87c6c627aaf5e381287800da43c3bf3b95e03428787b78f",
+  "apkSize": 16221414,
+  "sha256": "814b70c1ccb29901f0849263a7083dadc96e7c13bd493857f4fec1340800885f",
   "apkUrl": "https://progress-board.dansemur.workers.dev/watch/apk",
-  "timestamp": "2026-10-13T12:34:12.121498+00:00"
+  "timestamp": "2026-10-13T12:55:25.888458+00:00"
 }
