@@ -23,6 +23,8 @@
         <activity
             android:name="com.dansemur.ironman.ui.WeatherRadarActivity"
             android:exported="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
             android:label="Météo &amp; Radar"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
             <intent-filter>
@@ -30,6 +32,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Full-Screen Interactive News Reader -->
+        <activity
+            android:name="com.dansemur.ironman.ui.NewsActivity"
+            android:exported="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:label="Nouvelles"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
+
+        <!-- Full-Screen Interactive Progress Board Dashboard -->
+        <activity
+            android:name="com.dansemur.ironman.ui.ProgressActivity"
+            android:exported="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:label="Progress Board"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
 
         <property
             android:name="com.google.wear.watchface.format.version"
@@ -76,6 +96,25 @@
                 android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
                 android:value="300" />
         </service>
+
+        <!-- Live News Headlines Complication Data Source -->
+        <service
+            android:name="com.dansemur.ironman.complication.NewsComplicationService"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="Nouvelles en direct"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="LONG_TEXT,SHORT_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="180" />
+        </service>
+
 
         <!-- Wear OS Tile: Latest Screenshot & Live Progress -->
         <service

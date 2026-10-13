@@ -31,9 +31,28 @@ import java.net.URL
 class ProgressBoardTileService : TileService() {
 
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
+        val launchIntentAction = androidx.wear.protolayout.ActionBuilders.LaunchAction.Builder()
+            .setAndroidActivity(
+                androidx.wear.protolayout.ActionBuilders.AndroidActivity.Builder()
+                    .setPackageName("com.dansemur.ironman")
+                    .setClassName("com.dansemur.ironman.ui.ProgressActivity")
+                    .build()
+            )
+            .build()
+
+        val clickable = androidx.wear.protolayout.ModifiersBuilders.Clickable.Builder()
+            .setOnClick(launchIntentAction)
+            .setId("open_progress_act")
+            .build()
+
+        val rootModifiers = androidx.wear.protolayout.ModifiersBuilders.Modifiers.Builder()
+            .setClickable(clickable)
+            .build()
+
         val root = LayoutElementBuilders.Box.Builder()
             .setWidth(expand())
             .setHeight(expand())
+            .setModifiers(rootModifiers)
             .setHorizontalAlignment(LayoutElementBuilders.HORIZONTAL_ALIGN_CENTER)
             .setVerticalAlignment(LayoutElementBuilders.VERTICAL_ALIGN_CENTER)
 

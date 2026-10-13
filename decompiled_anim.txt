@@ -1,0 +1,7 @@
+androidx/wear/protolayout/ModifiersBuilders$AnimatedVisibility$Builder.class
+androidx/wear/protolayout/ModifiersBuilders$AnimatedVisibility.class
+androidx/wear/protolayout/ResourceBuilders$AndroidAnimatedImageResourceByResId$Builder.class
+androidx/wear/protolayout/ResourceBuilders$AndroidAnimatedImageResourceByResId.class
+androidx/wear/protolayout/ResourceBuilders$AndroidSeekableAnimatedImageResourceByResId$Builder.class
+androidx/wear/protolayout/ResourceBuilders$AndroidSeekableAnimatedImageResourceByResId.class
+androidx/wear/protolayout/ResourceBuilders$AnimatedImageFormat.class

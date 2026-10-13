@@ -15,6 +15,7 @@ import androidx.core.view.InputDeviceCompat
 import androidx.core.view.MotionEventCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -42,30 +43,85 @@ class WeatherRadarActivity : Activity() {
     private lateinit var hourlyContainer: LinearLayout
     private lateinit var dailyContainer: LinearLayout
 
+    private var animationJob: kotlinx.coroutines.Job? = null
+    private val frameList = mutableListOf<Pair<String, android.graphics.Bitmap>>()
+
+    private var currentZoom = 9
+    private lateinit var radarBaseMap: ImageView
+    private lateinit var btnZoomToggle: TextView
+    private lateinit var topBarLayout: View
+    private lateinit var tvScrollPrompt: View
+
     companion object {
         private const val WEATHER_URL = "https://progress-board.dansemur.workers.dev/watch/weather"
-        private const val RADAR_URL = "https://progress-board.dansemur.workers.dev/watch/radar"
+        private const val BASE_FRAMES_URL = "https://progress-board.dansemur.workers.dev/watch/radar/frames"
+        private const val BASE_RADAR_URL = "https://progress-board.dansemur.workers.dev/watch/radar"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setShowWhenLocked(true)
+        setTurnScreenOn(true)
         setContentView(R.layout.activity_weather_radar)
 
         scrollView = findViewById(R.id.scrollView)
         tvLocation = findViewById(R.id.tvLocation)
         tvCurrentTemp = findViewById(R.id.tvCurrentTemp)
         tvCondition = findViewById(R.id.tvCondition)
+        radarBaseMap = findViewById(R.id.radarBaseMap)
         radarImageView = findViewById(R.id.radarImageView)
         tvRadarStatus = findViewById(R.id.tvRadarStatus)
+        btnZoomToggle = findViewById(R.id.btnZoomToggle)
+        topBarLayout = findViewById(R.id.topBarLayout)
+        tvScrollPrompt = findViewById(R.id.tvScrollPrompt)
         hourlyContainer = findViewById(R.id.hourlyContainer)
         dailyContainer = findViewById(R.id.dailyContainer)
+
+        val fullScreenSpacer = findViewById<View>(R.id.fullScreenSpacer)
+        fullScreenSpacer.layoutParams.height = resources.displayMetrics.heightPixels
+
+        // Setup Zoom button toggle: 9 -> 8 -> 10 -> 9
+        btnZoomToggle.setOnClickListener {
+            currentZoom = when (currentZoom) {
+                9 -> 8
+                8 -> 10
+                else -> 9
+            }
+            applyZoom(currentZoom)
+        }
+
+        // Fade overlays as user scrolls down to reveal forecast
+        scrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+            val alpha = (1f - (scrollY / 180f)).coerceIn(0f, 1f)
+            topBarLayout.alpha = alpha
+            topBarLayout.visibility = if (alpha <= 0.05f) View.GONE else View.VISIBLE
+            tvScrollPrompt.alpha = alpha
+            tvScrollPrompt.visibility = if (alpha <= 0.05f) View.GONE else View.VISIBLE
+        }
 
         // Enable rotary crown focus for smooth knob scrolling on Pixel Watch
         scrollView.isFocusable = true
         scrollView.isFocusableInTouchMode = true
         scrollView.requestFocus()
 
-        loadData()
+        applyZoom(currentZoom)
+        loadForecast()
+    }
+
+    private fun applyZoom(zoom: Int) {
+        btnZoomToggle.text = "Z$zoom 🔍"
+        val basemapRes = when (zoom) {
+            8 -> R.drawable.basemap_z8
+            10 -> R.drawable.basemap_z10
+            else -> R.drawable.basemap_z9
+        }
+        radarBaseMap.setImageResource(basemapRes)
+        loadRadarData(zoom)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        animationJob?.cancel()
     }
 
     override fun onGenericMotionEvent(event: MotionEvent): Boolean {
@@ -80,11 +136,62 @@ class WeatherRadarActivity : Activity() {
         return super.onGenericMotionEvent(event)
     }
 
-    private fun loadData() {
-        // 1. Fetch Radar
+    private fun loadRadarData(zoom: Int) {
+        animationJob?.cancel()
+        radarImageView.alpha = 0.80f
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val conn = URL(RADAR_URL).openConnection() as HttpURLConnection
+                val framesUrl = "$BASE_FRAMES_URL?zoom=$zoom"
+                val conn = URL(framesUrl).openConnection() as HttpURLConnection
+                conn.setRequestProperty("User-Agent", "IronmanWatch/1.0 (Android; WearOS)")
+                conn.connectTimeout = 4000
+                conn.readTimeout = 4000
+                if (conn.responseCode == 200) {
+                    val body = conn.inputStream.bufferedReader().use { it.readText() }
+                    val json = JSONObject(body)
+                    val arr = json.optJSONArray("frames")
+                    if (arr != null && arr.length() > 0) {
+                        val downloaded = mutableListOf<Pair<String, android.graphics.Bitmap>>()
+                        for (i in 0 until arr.length()) {
+                            val f = arr.getJSONObject(i)
+                            val timeStr = f.optString("time", "")
+                            val tileUrl = f.optString("tileUrl", "")
+                            try {
+                                val tConn = URL(tileUrl).openConnection() as HttpURLConnection
+                                tConn.setRequestProperty("User-Agent", "IronmanWatch/1.0 (Android; WearOS)")
+                                tConn.connectTimeout = 4000
+                                tConn.readTimeout = 4000
+                                if (tConn.responseCode == 200) {
+                                    val b = tConn.inputStream.use { it.readBytes() }
+                                    val bmp = BitmapFactory.decodeByteArray(b, 0, b.size)
+                                    if (bmp != null) {
+                                        downloaded.add(Pair(timeStr, bmp))
+                                    }
+                                }
+                            } catch (_: Exception) {}
+                        }
+                        if (downloaded.isNotEmpty()) {
+                            withContext(Dispatchers.Main) {
+                                frameList.clear()
+                                frameList.addAll(downloaded)
+                                val latest = frameList.last()
+                                radarImageView.setImageBitmap(latest.second)
+                                tvRadarStatus.text = "Radar · ${latest.first} (Direct)"
+                                kotlinx.coroutines.delay(1000L)
+                                startRadarAnimation()
+                            }
+                            return@launch
+                        }
+                    }
+                }
+            } catch (_: Exception) {}
+
+            // Fallback direct frame
+            try {
+                val radarUrl = "$BASE_RADAR_URL?zoom=$zoom"
+                val conn = URL(radarUrl).openConnection() as HttpURLConnection
+                conn.setRequestProperty("User-Agent", "IronmanWatch/1.0 (Android; WearOS)")
                 conn.connectTimeout = 5000
                 conn.readTimeout = 5000
                 if (conn.responseCode == 200) {
@@ -97,8 +204,9 @@ class WeatherRadarActivity : Activity() {
                 }
             } catch (_: Exception) {}
         }
+    }
 
-        // 2. Fetch Forecasts
+    private fun loadForecast() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val conn = URL(WEATHER_URL).openConnection() as HttpURLConnection
@@ -111,6 +219,21 @@ class WeatherRadarActivity : Activity() {
                     }
                 }
             } catch (_: Exception) {}
+        }
+    }
+
+    private fun startRadarAnimation() {
+        animationJob?.cancel()
+        animationJob = CoroutineScope(Dispatchers.Main).launch {
+            var idx = 0
+            while (isActive && frameList.isNotEmpty()) {
+                val (t, bmp) = frameList[idx]
+                radarImageView.setImageBitmap(bmp)
+                val isLatest = (idx == frameList.size - 1)
+                tvRadarStatus.text = "Radar · $t " + if (isLatest) "(Direct)" else "(Boucle)"
+                idx = (idx + 1) % frameList.size
+                kotlinx.coroutines.delay(if (isLatest) 1200L else 500L)
+            }
         }
     }
 
@@ -127,24 +250,19 @@ class WeatherRadarActivity : Activity() {
             tvCurrentTemp.text = "$temp°"
             tvCondition.text = "$cond · ressenti $feelsLike°"
 
-            // Populate Hourly (Next 24h)
+            // Populate Hourly (Next 8h in horizontal carousel)
             hourlyContainer.removeAllViews()
             val hourlyArr = root.optJSONArray("hourly")
             if (hourlyArr != null) {
-                for (i in 0 until minOf(24, hourlyArr.length())) {
+                val count = minOf(8, hourlyArr.length())
+                for (i in 0 until count) {
                     val hObj = hourlyArr.getJSONObject(i)
                     val hour = hObj.optString("hour", "").replace(":00", "h")
                     val hTemp = hObj.optInt("temp", 0)
                     val hPop = hObj.optInt("pop", 0)
-                    val hCond = hObj.optString("conditionFr", "")
 
-                    val row = createCardRow(
-                        left = hour,
-                        mid = hCond,
-                        right = "$hTemp°",
-                        sub = if (hPop > 0) "$hPop% pluie" else ""
-                    )
-                    hourlyContainer.addView(row)
+                    val card = createHourlyCard(hour, hTemp, hPop)
+                    hourlyContainer.addView(card)
                 }
             }
 
@@ -170,6 +288,47 @@ class WeatherRadarActivity : Activity() {
                 }
             }
         } catch (_: Exception) {}
+    }
+
+    private fun createHourlyCard(hour: String, temp: Int, pop: Int): View {
+        val card = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            layoutParams = LinearLayout.LayoutParams(
+                120, // width in px
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                setMargins(8, 0, 8, 0)
+            }
+            gravity = Gravity.CENTER_HORIZONTAL
+            setBackgroundColor(Color.parseColor("#111827"))
+            setPadding(8, 12, 8, 12)
+        }
+
+        val tvH = TextView(this).apply {
+            text = hour
+            setTextColor(Color.parseColor("#94A3B8"))
+            textSize = 11f
+            gravity = Gravity.CENTER
+        }
+        val tvT = TextView(this).apply {
+            text = "$temp°"
+            setTextColor(Color.WHITE)
+            textSize = 15f
+            typeface = android.graphics.Typeface.DEFAULT_BOLD
+            gravity = Gravity.CENTER
+            setPadding(0, 4, 0, 4)
+        }
+        val tvP = TextView(this).apply {
+            text = if (pop > 0) "$pop%" else "0%"
+            setTextColor(Color.parseColor("#38BDF8"))
+            textSize = 10f
+            gravity = Gravity.CENTER
+        }
+
+        card.addView(tvH)
+        card.addView(tvT)
+        card.addView(tvP)
+        return card
     }
 
     private fun createCardRow(left: String, mid: String, right: String, sub: String): View {

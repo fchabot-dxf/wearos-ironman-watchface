@@ -1,144 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollView"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    android:fillViewport="true"
-    android:scrollbars="none">
+    android:background="#000000">
 
-    <LinearLayout
-        android:id="@+id/contentLayout"
+    <!-- 1. FULL-SCREEN EDGE-TO-EDGE RADAR (Behind everything) -->
+    <FrameLayout
+        android:id="@+id/radarFullScreenContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:paddingTop="36dp"
-        android:paddingBottom="56dp"
-        android:gravity="center_horizontal">
+        android:layout_height="match_parent">
 
-        <!-- Header: Location & Condition -->
-        <TextView
-            android:id="@+id/tvLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MONTRÉAL · QC SUD"
-            android:textColor="#38BDF8"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.05" />
+        <ImageView
+            android:id="@+id/radarBaseMap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/radar_basemap" />
 
-        <TextView
-            android:id="@+id/tvCurrentTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="15°"
-            android:textColor="#FFFFFF"
-            android:textSize="48sp"
-            android:textStyle="bold"
-            android:layout_marginTop="2dp" />
+        <ImageView
+            android:id="@+id/radarImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:alpha="0.80" />
 
-        <TextView
-            android:id="@+id/tvCondition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bruine modérée · ressenti 16°"
-            android:textColor="#94A3B8"
-            android:textSize="12sp"
-            android:layout_marginBottom="16dp" />
+        <!-- User Position Marker Dot (Centered) -->
+        <ImageView
+            android:id="@+id/ivUserDot"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_user_location_dot" />
+    </FrameLayout>
 
-        <!-- ==================== RADAR CARD ==================== -->
+    <!-- 2. SCROLLABLE CONTENT (Overlaid on top, first screen is transparent to view the full radar!) -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fillViewport="true">
+
         <LinearLayout
+            android:id="@+id/contentLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#111827"
-            android:padding="12dp"
             android:gravity="center_horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RADAR DE PLUIE (1 KM)"
-                android:textColor="#38BDF8"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+            <!-- FIRST SCREEN: Transparent Spacer matching the watch screen height so the radar is 100% full screen! -->
+            <View
+                android:id="@+id/fullScreenSpacer"
+                android:layout_width="match_parent"
+                android:layout_height="240dp" />
 
-            <ImageView
-                android:id="@+id/radarImageView"
-                android:layout_width="220dp"
-                android:layout_height="180dp"
-                android:scaleType="fitCenter"
-                android:background="#000000" />
+            <!-- SECOND SCREEN: Forecast Content Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#F0000000"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingTop="28dp"
+                android:paddingBottom="56dp"
+                android:gravity="center_horizontal">
+
+                <!-- Header: Location & Condition -->
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MONTRÉAL · QC SUD"
+                    android:textColor="#38BDF8"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05" />
+
+                <TextView
+                    android:id="@+id/tvCurrentTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15°"
+                    android:textColor="#FFFFFF"
+                    android:textSize="48sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/tvCondition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bruine modérée · ressenti 16°"
+                    android:textColor="#94A3B8"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#1E293B"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- HOURLY FORECAST (HORIZONTAL CAROUSEL) -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PRÉVISIONS 24H (HORAIRE)"
+                    android:textColor="#38BDF8"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:id="@+id/hourlyContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp" />
+                </HorizontalScrollView>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#1E293B"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- 7-DAY FORECAST -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PRÉVISIONS 7 JOURS"
+                    android:textColor="#38BDF8"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp" />
+
+                <LinearLayout
+                    android:id="@+id/dailyContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+                <!-- Footer -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Modèle GEM · Environnement Canada"
+                    android:textColor="#475569"
+                    android:textSize="9sp"
+                    android:layout_marginTop="20dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 3. FLOATING OVERLAYS (Z-ordered on top of ScrollView so touch events on buttons work) -->
+    <LinearLayout
+        android:id="@+id/topBarLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#AA0F172A"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <TextView
                 android:id="@+id/tvRadarStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GeoMet ECCC · Mise à jour récente"
-                android:textColor="#64748B"
-                android:textSize="10sp"
-                android:layout_marginTop="6dp" />
+                android:text="Radar · Direct"
+                android:textColor="#38BDF8"
+                android:textSize="11sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Divider -->
         <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#1E293B"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_width="6dp"
+            android:layout_height="1dp" />
 
-        <!-- ==================== HOURLY FORECAST ==================== -->
         <TextView
+            android:id="@+id/btnZoomToggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PRÉVISIONS 24H (HORAIRE)"
-            android:textColor="#38BDF8"
+            android:background="#CC0284C7"
+            android:text="Z9 🔍"
+            android:textColor="#FFFFFF"
             android:textSize="11sp"
             android:textStyle="bold"
-            android:layout_marginBottom="10dp" />
-
-        <LinearLayout
-            android:id="@+id/hourlyContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-
-        <!-- Divider -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#1E293B"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- ==================== 7-DAY FORECAST ==================== -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PRÉVISIONS 7 JOURS"
-            android:textColor="#38BDF8"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp" />
-
-        <LinearLayout
-            android:id="@+id/dailyContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-
-        <!-- Footer -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Modèle GEM · Environnement Canada"
-            android:textColor="#475569"
-            android:textSize="9sp"
-            android:layout_marginTop="20dp" />
-
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
     </LinearLayout>
-</ScrollView>
+
+    <TextView
+        android:id="@+id/tvScrollPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:text="▼ Glisser pour les prévisions"
+        android:textColor="#CCFFFFFF"
+        android:textSize="10sp"
+        android:background="#88000000"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp" />
+
+</FrameLayout>

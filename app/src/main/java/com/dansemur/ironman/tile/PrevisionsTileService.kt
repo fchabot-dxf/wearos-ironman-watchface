@@ -5,6 +5,7 @@ import androidx.wear.protolayout.DimensionBuilders.dp
 import androidx.wear.protolayout.DimensionBuilders.expand
 import androidx.wear.protolayout.DimensionBuilders.sp
 import androidx.wear.protolayout.LayoutElementBuilders
+import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
@@ -44,9 +45,28 @@ class PrevisionsTileService : TileService() {
 
         val tileData = parseWeather(cachedJson)
 
+        val launchIntentAction = androidx.wear.protolayout.ActionBuilders.LaunchAction.Builder()
+            .setAndroidActivity(
+                androidx.wear.protolayout.ActionBuilders.AndroidActivity.Builder()
+                    .setPackageName("com.dansemur.ironman")
+                    .setClassName("com.dansemur.ironman.ui.WeatherRadarActivity")
+                    .build()
+            )
+            .build()
+
+        val clickable = androidx.wear.protolayout.ModifiersBuilders.Clickable.Builder()
+            .setOnClick(launchIntentAction)
+            .setId("open_weather_from_previsions")
+            .build()
+
+        val rootModifiers = androidx.wear.protolayout.ModifiersBuilders.Modifiers.Builder()
+            .setClickable(clickable)
+            .build()
+
         val root = LayoutElementBuilders.Box.Builder()
             .setWidth(expand())
             .setHeight(expand())
+            .setModifiers(rootModifiers)
             .setHorizontalAlignment(LayoutElementBuilders.HORIZONTAL_ALIGN_CENTER)
             .setVerticalAlignment(LayoutElementBuilders.VERTICAL_ALIGN_CENTER)
 
@@ -168,6 +188,14 @@ class PrevisionsTileService : TileService() {
             .build()
 
         return Futures.immediateFuture(tile)
+    }
+
+    override fun onTileResourcesRequest(requestParams: RequestBuilders.ResourcesRequest): ListenableFuture<ResourceBuilders.Resources> {
+        return Futures.immediateFuture(
+            ResourceBuilders.Resources.Builder()
+                .setVersion(requestParams.version)
+                .build()
+        )
     }
 
     private fun fetchWeather() {

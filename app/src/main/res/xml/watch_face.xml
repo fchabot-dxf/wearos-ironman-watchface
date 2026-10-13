@@ -59,96 +59,51 @@
         </PartText>
 
         <!-- ======================================================== -->
-        <!-- NEWS STREAM (Double the words: Headline + 2 Sublines)    -->
-        <!-- Stationary page flip every 12s, zero battery drain       -->
+        <!-- LIVE NEWS STREAM COMPLICATION (Slot 0, LONG_TEXT)        -->
+        <!-- Live Radio-Canada / CBC feed via NewsComplicationService -->
         <!-- ======================================================== -->
-        <Condition>
-            <Expressions>
-                <Expression name="h0"><![CDATA[([IS_AMBIENT] ? [MINUTE] : floor([SECOND] / 12)) % 6 == 0]]></Expression>
-                <Expression name="h1"><![CDATA[([IS_AMBIENT] ? [MINUTE] : floor([SECOND] / 12)) % 6 == 1]]></Expression>
-                <Expression name="h2"><![CDATA[([IS_AMBIENT] ? [MINUTE] : floor([SECOND] / 12)) % 6 == 2]]></Expression>
-                <Expression name="h3"><![CDATA[([IS_AMBIENT] ? [MINUTE] : floor([SECOND] / 12)) % 6 == 3]]></Expression>
-                <Expression name="h4"><![CDATA[([IS_AMBIENT] ? [MINUTE] : floor([SECOND] / 12)) % 6 == 4]]></Expression>
-            </Expressions>
-            <!-- Slot 0: Option A (2 lines @ 22pt) - Artemis -->
-            <Compare expression="h0">
-                <PartText x="15" y="104" width="420" height="32">
+        <ComplicationSlot slotId="0"
+            x="15" y="100" width="420" height="68"
+            supportedTypes="LONG_TEXT SHORT_TEXT"
+            isCustomizable="TRUE">
+            <BoundingBox x="0" y="0" width="420" height="68" />
+            <DefaultProviderPolicy
+                defaultSystemProvider="EMPTY"
+                defaultSystemProviderType="SHORT_TEXT"
+                primaryProvider="com.dansemur.ironman/com.dansemur.ironman.complication.NewsComplicationService"
+                primaryProviderType="LONG_TEXT" />
+            <Complication type="LONG_TEXT">
+                <!-- Line 1: Title (centered, 22pt, cyan) -->
+                <PartText x="0" y="4" width="420" height="32">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>ARTEMIS III · Mission 2026</Template></Font></Text>
+                    <Text align="CENTER" ellipsis="TRUE">
+                        <Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8">
+                            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]"/></Template>
+                        </Font>
+                    </Text>
                 </PartText>
-                <PartText x="15" y="136" width="420" height="32">
+                <!-- Line 2: Details / Body (centered, 20pt, cyan) -->
+                <PartText x="0" y="36" width="420" height="32">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>4 astronautes vers le pôle Sud.</Template></Font></Text>
+                    <Text align="CENTER" ellipsis="TRUE">
+                        <Font family="SYNC_TO_DEVICE" size="20" weight="NORMAL" color="#38BDF8">
+                            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]"/></Template>
+                        </Font>
+                    </Text>
                 </PartText>
-            </Compare>
-            <!-- Slot 1: Option B (3 lines @ 19pt) - Artemis Continuous -->
-            <Compare expression="h1">
-                <PartText x="15" y="97" width="420" height="25">
+            </Complication>
+            <Complication type="SHORT_TEXT">
+                <PartText x="0" y="18" width="420" height="32">
                     <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>ARTEMIS III · Mission lunaire 2026</Template></Font></Text>
+                    <Text align="CENTER" ellipsis="TRUE">
+                        <Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8">
+                            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]"/></Template>
+                        </Font>
+                    </Text>
                 </PartText>
-                <PartText x="15" y="122" width="420" height="25">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>Quatre astronautes vers le pôle Sud,</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="147" width="420" height="25">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>recherche d'eau glacée permanente.</Template></Font></Text>
-                </PartText>
-            </Compare>
-            <!-- Slot 2: Option A (2 lines @ 22pt) - Quantique -->
-            <Compare expression="h2">
-                <PartText x="15" y="104" width="420" height="32">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>QUANTIQUE · Hub de Sherbrooke</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="136" width="420" height="32">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>Pôle d'excellence en calcul avancé.</Template></Font></Text>
-                </PartText>
-            </Compare>
-            <!-- Slot 3: Option B (3 lines @ 19pt) - Quantique Continuous -->
-            <Compare expression="h3">
-                <PartText x="15" y="97" width="420" height="25">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>QUANTIQUE · Hub d'innovation majeur</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="122" width="420" height="25">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>Le Québec propulsé en tête mondiale</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="147" width="420" height="25">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>du calcul et de la physique avancée.</Template></Font></Text>
-                </PartText>
-            </Compare>
-            <!-- Slot 4: Option A (2 lines @ 22pt) - Fusion -->
-            <Compare expression="h4">
-                <PartText x="15" y="104" width="420" height="32">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>FUSION · Record mondial net</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="136" width="420" height="32">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#38BDF8"><Template>Plasma stable de six minutes.</Template></Font></Text>
-                </PartText>
-            </Compare>
-            <!-- Slot 5: Option B (3 lines @ 19pt) - Fusion Continuous -->
-            <Default>
-                <PartText x="15" y="97" width="420" height="25">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>FUSION · Nouveau record mondial net</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="122" width="420" height="25">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>Plasma stable maintenu six minutes,</Template></Font></Text>
-                </PartText>
-                <PartText x="15" y="147" width="420" height="25">
-                    <Variant mode="AMBIENT" target="alpha" value="102"/>
-                    <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#38BDF8"><Template>percée vers une énergie propre infinie.</Template></Font></Text>
-                </PartText>
-            </Default>
-        </Condition>
+            </Complication>
+        </ComplicationSlot>
+
 
         <!-- ======================================================== -->
         <!-- MAIN DIGITAL TIME (Hours : Minutes at y=168 in 92pt DSEG) -->

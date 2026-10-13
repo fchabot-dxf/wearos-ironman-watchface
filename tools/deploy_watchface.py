@@ -154,8 +154,8 @@ def read_params_xml() -> dict:
 
 def apply_news_layout(layout: str):
     """
-    Regenerate the <Condition> news block in watch_face.xml with the given layout.
-    Replaces everything between the NEWS STREAM comment block and </Condition>.
+    If a dynamic ComplicationSlot is present, preserve it.
+    Otherwise regenerate the static Condition news block.
     """
     src = RAW_DIR / "watch_face.xml"
     if not src.exists():
@@ -165,6 +165,10 @@ def apply_news_layout(layout: str):
         return
 
     content = src.read_text(encoding="utf-8")
+    if "LIVE NEWS STREAM COMPLICATION" in content:
+        log("Dynamic News ComplicationSlot detected — preserving live complication.")
+        return
+
     new_block = generate_news_xml(layout)
 
     # Replace the entire news Condition block (from the first NEWS STREAM comment to </Condition>)
@@ -177,6 +181,7 @@ def apply_news_layout(layout: str):
 
     src.write_text(updated, encoding="utf-8")
     log(f"News layout applied: {layout} ({len(NEWS_STORIES)} stories)")
+
 
 
 def sync_xml_files():
