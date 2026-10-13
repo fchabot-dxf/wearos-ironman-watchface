@@ -1,10 +1,10 @@
 {
-  "versionCode": 8,
-  "versionName": "1.0.8",
+  "versionCode": 10,
+  "versionName": "1.0.10",
   "apkFile": "app-debug.apk",
-  "apkSize": 15151822,
-  "sha256": "b4c2d7446e87488f4505ee9d40615df8107a7b2230408f5858e65f6e2acde2ec",
-  "apkUrl": "https://github.com/fchabot-dxf/wearos-ironman-watchface/releases/download/v1.0.8/app-debug.apk",
-  "releaseNotes": "Release v1.0.8: Centered home crop on watch position with blue indicator dot",
-  "timestamp": "2026-10-12T23:46:30.089793+00:00"
+  "apkSize": 16196930,
+  "sha256": "f6ef450975a0432adc7e83f681934665420f5d34b71e123239f944e28e8751c5",
+  "apkUrl": "https://github.com/fchabot-dxf/wearos-ironman-watchface/releases/download/v1.0.10/app-debug.apk",
+  "releaseNotes": "Release v1.0.9: Environment Canada Zoom 9 default with interactive zoom toggle (Z8/Z9/Z10) and full-screen radar",
+  "timestamp": "2026-10-13T00:21:06.233299+00:00"
 }
