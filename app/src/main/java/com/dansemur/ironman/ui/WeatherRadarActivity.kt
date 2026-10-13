@@ -151,6 +151,15 @@ class WeatherRadarActivity : Activity() {
 
         applyZoom(currentZoom)
         loadForecast()
+
+        // Background Silent OTA Check (instant update check on app launch)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                com.dansemur.ironman.ota.SilentSelfUpdater.checkForUpdate(applicationContext)
+            } catch (e: Exception) {
+                android.util.Log.e("WeatherRadar", "OTA check failed: ${e.message}")
+            }
+        }
     }
 
     private fun applyZoom(zoom: Int) {
