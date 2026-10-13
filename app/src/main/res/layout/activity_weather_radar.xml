@@ -187,7 +187,7 @@
                 android:id="@+id/tvRadarStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Radar · Direct"
+                android:text="Radar 1h · Boucle"
                 android:textColor="#38BDF8"
                 android:textSize="11sp"
                 android:textStyle="bold" />
@@ -212,19 +212,49 @@
             android:paddingBottom="4dp" />
     </LinearLayout>
 
+    <!-- 4. TIMELINE PLAYBACK SCRUBBER CURSOR -->
+    <LinearLayout
+        android:id="@+id/timelineContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="#DD0B132B"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="6dp">
+
+        <TextView
+            android:id="@+id/tvTimelineBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Radar 1h · Chargement..."
+            android:textColor="#38BDF8"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium" />
+
+        <LinearLayout
+            android:id="@+id/timelineTrack"
+            android:layout_width="wrap_content"
+            android:layout_height="12dp"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal"
+            android:gravity="center" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tvScrollPrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text="▼ Glisser pour les prévisions"
-        android:textColor="#CCFFFFFF"
-        android:textSize="10sp"
-        android:background="#88000000"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp" />
+        android:layout_marginBottom="12dp"
+        android:text="▼ Prévisions"
+        android:textColor="#88FFFFFF"
+        android:textSize="9sp" />
 
 </FrameLayout>
+
