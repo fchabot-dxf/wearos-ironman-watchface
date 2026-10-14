@@ -23,13 +23,21 @@
         </PartDraw>
 
         <!-- ======================================================== -->
-        <!-- TOP DATE ROW (y=58 in 30pt DSEG)                         -->
+        <!-- TOP DATE ROW: TUE MM/DD with small month name under MM   -->
         <!-- ======================================================== -->
-        <PartText x="50" y="58" width="350" height="34">
+        <PartText x="50" y="54" width="350" height="32">
             <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Text align="CENTER">
-                <Font family="dseg14_classic_bold_italic" size="30" color="#38BDF8">
-                    <Template>%1$s %2$s %3$02d<Parameter expression="[DAY_OF_WEEK_S]"/><Parameter expression="[MONTH_S]"/><Parameter expression="[DAY]"/></Template>
+                <Font family="dseg14_classic_bold_italic" size="28" color="#38BDF8">
+                    <Template>%1$s %2$02d/%3$02d<Parameter expression="[DAY_OF_WEEK_S]"/><Parameter expression="[MONTH]"/><Parameter expression="[DAY]"/></Template>
+                </Font>
+            </Text>
+        </PartText>
+        <PartText x="200" y="81" width="56" height="18">
+            <Variant mode="AMBIENT" target="alpha" value="102"/>
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#7DD3FC">
+                    <Template>%1$s<Parameter expression="[MONTH_S]"/></Template>
                 </Font>
             </Text>
         </PartText>
@@ -127,7 +135,7 @@
             <Ellipse x="2" y="0" width="10" height="11"><Fill color="#818CF8"/></Ellipse>
             <Ellipse x="3" y="13" width="8" height="5"><Fill color="#818CF8"/></Ellipse>
         </PartDraw>
-        <PartText x="66" y="296" width="74" height="24">
+        <PartText x="66" y="296" width="95" height="24">
             <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Text align="START">
                 <Font family="dseg14_classic_bold_italic" size="20" color="#38BDF8">
@@ -212,7 +220,8 @@
         <!-- Right: Hi and Lo stacked vertically + Rain beside        -->
         <!-- ======================================================== -->
         <!-- 1. Left Side: Weather Condition Icon (Warm Sun Tint #FDE047) + Big Current Temp -->
-        <PartDraw x="88" y="354" width="24" height="24">
+        <PartDraw x="92" y="354" width="24" height="24">
+            <Transform target="x" value="round([WEATHER.TEMPERATURE]) &gt;= 0 &amp;&amp; round([WEATHER.TEMPERATURE]) &lt;= 9 ? 132 : 92"/>
             <Variant mode="AMBIENT" target="alpha" value="102"/>
             <Ellipse x="6" y="6" width="12" height="12"><Fill color="#FDE047"/></Ellipse>
             <Line startX="12" startY="0" endX="12" endY="4"><Stroke color="#FDE047" thickness="2"/></Line>
@@ -228,9 +237,9 @@
         <!-- Big Current Temp Digits (50pt DSEG) -->
         <PartText x="116" y="338" width="85" height="56">
             <Variant mode="AMBIENT" target="alpha" value="102"/>
-            <Text align="START">
+            <Text align="END">
                 <Font family="dseg14_classic_bold_italic" size="50" color="#38BDF8">
-                    <Template>%1$02d<Parameter expression="round([WEATHER.TEMPERATURE])"/></Template>
+                    <Template>%1$d<Parameter expression="round([WEATHER.TEMPERATURE])"/></Template>
                 </Font>
             </Text>
         </PartText>
@@ -251,11 +260,11 @@
             <Line startX="5" startY="0" endX="1" endY="4"><Stroke color="#38BDF8" thickness="2"/></Line>
             <Line startX="5" startY="0" endX="9" endY="4"><Stroke color="#38BDF8" thickness="2"/></Line>
         </PartDraw>
-        <PartText x="249" y="342" width="32" height="22">
+        <PartText x="249" y="342" width="28" height="22">
             <Variant mode="AMBIENT" target="alpha" value="102"/>
-            <Text align="START">
+            <Text align="END">
                 <Font family="dseg14_classic_bold_italic" size="18" color="#38BDF8">
-                    <Template>%1$02d<Parameter expression="round([WEATHER.TEMPERATURE] + 3)"/></Template>
+                    <Template>%1$d<Parameter expression="round([WEATHER.TEMPERATURE] + 3)"/></Template>
                 </Font>
             </Text>
         </PartText>
@@ -275,11 +284,11 @@
             <Line startX="5" startY="13" endX="1" endY="9"><Stroke color="#38BDF8" thickness="2"/></Line>
             <Line startX="5" startY="13" endX="9" endY="9"><Stroke color="#38BDF8" thickness="2"/></Line>
         </PartDraw>
-        <PartText x="249" y="372" width="32" height="22">
+        <PartText x="249" y="372" width="28" height="22">
             <Variant mode="AMBIENT" target="alpha" value="102"/>
-            <Text align="START">
+            <Text align="END">
                 <Font family="dseg14_classic_bold_italic" size="18" color="#38BDF8">
-                    <Template>%1$02d<Parameter expression="round([WEATHER.TEMPERATURE] - 7)"/></Template>
+                    <Template>%1$d<Parameter expression="round([WEATHER.TEMPERATURE] - 7)"/></Template>
                 </Font>
             </Text>
         </PartText>
