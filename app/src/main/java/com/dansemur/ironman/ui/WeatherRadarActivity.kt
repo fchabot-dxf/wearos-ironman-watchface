@@ -1,9 +1,13 @@
 package com.dansemur.ironman.ui
 
+import android.Manifest
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -80,6 +84,15 @@ class WeatherRadarActivity : Activity() {
         setShowWhenLocked(true)
         setTurnScreenOn(true)
         setContentView(R.layout.activity_weather_radar)
+
+        // This is the app's launcher activity, the only place with a screen to put a
+        // system permission dialog on - MaisonTileService can't request this itself.
+        // Used to make the "Maison" collecte tile location-aware.
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 1001)
+        }
 
         scrollView = findViewById(R.id.scrollView)
         tvLocation = findViewById(R.id.tvLocation)
