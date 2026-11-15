@@ -24,3 +24,6 @@ Thumbs.db
 
 # OS / Tooling
 preview/*.png
+
+# Shapes face local previews (regenerate with shapes/tools/generate_face.py)
+shapes/preview/
