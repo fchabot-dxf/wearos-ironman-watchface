@@ -27,3 +27,4 @@ preview/*.png
 
 # Shapes face local previews (regenerate with shapes/tools/generate_face.py)
 shapes/preview/
+shapes/tools/.wff_xsd/
