@@ -197,6 +197,54 @@
                 android:resource="@drawable/ic_launcher" />
         </service>
 
+        <!-- Wear OS Tile 5: Maison (radio/Tivoli status) -->
+        <service
+            android:name="com.dansemur.ironman.tile.MaisonTileService"
+            android:icon="@drawable/ic_launcher"
+            android:label="Maison"
+            android:description="@string/tile_maison_desc"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/ic_launcher" />
+        </service>
+
+        <!-- Wear OS Tile 6: Bus (nearest STM arrival) -->
+        <service
+            android:name="com.dansemur.ironman.tile.BusTileService"
+            android:icon="@drawable/ic_launcher"
+            android:label="Bus"
+            android:description="@string/tile_bus_desc"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/ic_launcher" />
+        </service>
+
+        <!-- Wear OS Tile 7: Météo (current conditions) -->
+        <service
+            android:name="com.dansemur.ironman.tile.MeteoTileService"
+            android:icon="@drawable/ic_launcher"
+            android:label="Météo"
+            android:description="@string/tile_meteo_desc"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/ic_launcher" />
+        </service>
+
     </application>
 
 </manifest>

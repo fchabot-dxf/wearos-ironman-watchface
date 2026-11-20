@@ -30,4 +30,7 @@
     <string name="tile_radar_desc">Radar de pluie en temps réel GeoMet</string>
     <string name="tile_news_desc">Fil de nouvelles en direct</string>
     <string name="tile_collecte_desc">Rappel de collecte (ordures, recyclage, compost)</string>
+    <string name="tile_maison_desc">Radio Tivoli : poste et état du groupement</string>
+    <string name="tile_bus_desc">Prochain autobus STM à proximité</string>
+    <string name="tile_meteo_desc">Conditions météo actuelles (Open-Meteo)</string>
 </resources>
