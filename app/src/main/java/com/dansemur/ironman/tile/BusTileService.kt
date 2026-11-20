@@ -151,6 +151,7 @@ class BusTileService : TileService() {
                 // no server-side default here (unlike the Collecte endpoint) - nothing to fetch
                 cachedJson = null
                 lastFetchTime = System.currentTimeMillis()
+                TileService.getUpdater(this).requestUpdate(BusTileService::class.java)
                 return
             }
             val url = "$BASE_URL?lat=${pos.first}&lon=${pos.second}"
@@ -160,6 +161,10 @@ class BusTileService : TileService() {
             if (conn.responseCode == 200) {
                 cachedJson = conn.inputStream.bufferedReader().use { it.readText() }
                 lastFetchTime = System.currentTimeMillis()
+                // Without this, the tile only re-renders at the next natural freshness tick or
+                // when the user swipes away and back - the very first view (or any view started
+                // before this fetch lands) would be stuck showing "Chargement..." indefinitely.
+                TileService.getUpdater(this).requestUpdate(BusTileService::class.java)
             }
         } catch (_: Exception) {}
     }

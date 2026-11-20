@@ -154,6 +154,10 @@ class CollecteTileService : TileService() {
             if (conn.responseCode == 200) {
                 cachedJson = conn.inputStream.bufferedReader().use { it.readText() }
                 lastFetchTime = System.currentTimeMillis()
+                // Without this, the tile only re-renders at the next natural freshness tick or
+                // when the user swipes away and back - the very first view (or any view started
+                // before this fetch lands) would be stuck showing "Chargement..." indefinitely.
+                TileService.getUpdater(this).requestUpdate(CollecteTileService::class.java)
             }
         } catch (_: Exception) {}
     }
