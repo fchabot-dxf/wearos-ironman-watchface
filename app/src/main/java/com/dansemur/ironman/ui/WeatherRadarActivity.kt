@@ -86,8 +86,8 @@ class WeatherRadarActivity : Activity() {
         setContentView(R.layout.activity_weather_radar)
 
         // This is the app's launcher activity, the only place with a screen to put a
-        // system permission dialog on - MaisonTileService can't request this itself.
-        // Used to make the "Maison" collecte tile location-aware.
+        // system permission dialog on - a TileService can't request this itself.
+        // Used to make the Collecte tile location-aware.
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) {

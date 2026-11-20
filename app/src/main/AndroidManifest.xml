@@ -181,12 +181,12 @@
                 android:resource="@drawable/ic_launcher" />
         </service>
 
-        <!-- Wear OS Tile 4: Collecte Maison -->
+        <!-- Wear OS Tile 4: Collecte -->
         <service
-            android:name="com.dansemur.ironman.tile.MaisonTileService"
+            android:name="com.dansemur.ironman.tile.CollecteTileService"
             android:icon="@drawable/ic_launcher"
-            android:label="Maison"
-            android:description="@string/tile_maison_desc"
+            android:label="Collecte"
+            android:description="@string/tile_collecte_desc"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
             android:exported="true">
             <intent-filter>

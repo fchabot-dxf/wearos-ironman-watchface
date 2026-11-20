@@ -26,16 +26,16 @@ import java.net.URL
 import java.util.concurrent.TimeUnit
 
 /**
- * MaisonTileService
+ * CollecteTileService
  *
  * Wear OS Tile showing the house's collecte (garbage/recycling/compost)
- * reminder from the maison dashboard's own worker. Collecte-only for now -
- * no Tivoli/radio status yet.
+ * reminder from the maison dashboard's own worker. Mirrors the dashboard's
+ * "Collecte" tab - no Tivoli/radio status here, see MaisonTileService for that.
  */
-class MaisonTileService : TileService() {
+class CollecteTileService : TileService() {
 
     companion object {
-        private const val BASE_URL = "https://local-dash-api.dansemur.workers.dev/bus/watch/maison"
+        private const val BASE_URL = "https://local-dash-api.dansemur.workers.dev/bus/watch/collecte"
         @Volatile
         private var cachedJson: String? = null
         @Volatile
@@ -45,11 +45,11 @@ class MaisonTileService : TileService() {
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         if (System.currentTimeMillis() - lastFetchTime > 600_000L || cachedJson == null) {
             CoroutineScope(Dispatchers.IO).launch {
-                fetchMaison()
+                fetchCollecte()
             }
         }
 
-        val data = parseMaison(cachedJson)
+        val data = parseCollecte(cachedJson)
 
         val root = LayoutElementBuilders.Box.Builder()
             .setWidth(expand())
@@ -144,7 +144,7 @@ class MaisonTileService : TileService() {
         }
     }
 
-    private fun fetchMaison() {
+    private fun fetchCollecte() {
         try {
             val pos = lastKnownLocation()
             val url = if (pos != null) "$BASE_URL?lat=${pos.first}&lon=${pos.second}" else BASE_URL
@@ -158,11 +158,11 @@ class MaisonTileService : TileService() {
         } catch (_: Exception) {}
     }
 
-    private data class MaisonTileData(val headline: String, val subline: String?)
+    private data class CollecteTileData(val headline: String, val subline: String?)
 
-    private fun parseMaison(jsonStr: String?): MaisonTileData {
+    private fun parseCollecte(jsonStr: String?): CollecteTileData {
         if (jsonStr == null) {
-            return MaisonTileData("Chargement...", null)
+            return CollecteTileData("Chargement...", null)
         }
         try {
             val obj = JSONObject(jsonStr)
@@ -170,12 +170,12 @@ class MaisonTileService : TileService() {
             val tonight = collecte?.optString("tonight", null)
             val next = collecte?.optString("next", null)
             return when {
-                !tonight.isNullOrEmpty() -> MaisonTileData("Ce soir", tonight)
-                !next.isNullOrEmpty() -> MaisonTileData("Prochaine", next)
-                else -> MaisonTileData("Aucune collecte", null)
+                !tonight.isNullOrEmpty() -> CollecteTileData("Ce soir", tonight)
+                !next.isNullOrEmpty() -> CollecteTileData("Prochaine", next)
+                else -> CollecteTileData("Aucune collecte", null)
             }
         } catch (_: Exception) {
-            return MaisonTileData("Erreur", null)
+            return CollecteTileData("Erreur", null)
         }
     }
 }
