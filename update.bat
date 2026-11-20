@@ -1,5 +1,5 @@
 @echo off
-set "JAVA_HOME=C:\Users\danse\AppData\Local\Android\jdk17\jdk-17.0.12+7"
+set "JAVA_HOME=C:\Users\danse\AppData\Local\Android\jdk17"
 set "ADB=c:\Users\danse\APPS\WearOS\tools\platform-tools\adb.exe"
 
 echo [1/3] Building Watch Face APK...

@@ -238,7 +238,7 @@ def build_apk():
     env = os.environ.copy()
     jdk_paths = [
         Path(r"C:\Program Files\Android\Android Studio\jbr"),
-        Path(r"C:\Users\danse\AppData\Local\Android\jdk17\jdk-17.0.12+7")
+        Path(r"C:\Users\danse\AppData\Local\Android\jdk17")
     ]
     for jdk in jdk_paths:
         if jdk.exists():
