@@ -70,7 +70,7 @@ def build_apk():
     print("[PIPELINE] Compiling APK (gradlew.bat assembleDebug)...")
     env = os.environ.copy()
     if not env.get("JAVA_HOME") or not Path(env["JAVA_HOME"]).exists():
-        default_jdk = Path(r"C:\Users\danse\AppData\Local\Android\jdk17\jdk-17.0.12+7")
+        default_jdk = Path(r"C:\Users\danse\AppData\Local\Android\jdk17")
         if default_jdk.exists():
             env["JAVA_HOME"] = str(default_jdk)
             env["PATH"] = f"{default_jdk / 'bin'}{os.pathsep}{env.get('PATH', '')}"
