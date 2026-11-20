@@ -33,4 +33,5 @@
     <string name="tile_maison_desc">Radio Tivoli : poste et état du groupement</string>
     <string name="tile_bus_desc">Prochain autobus STM à proximité</string>
     <string name="tile_meteo_desc">Conditions météo actuelles (Open-Meteo)</string>
+    <string name="tile_grille_desc">Émission en cours et à suivre (ICI Première par défaut)</string>
 </resources>

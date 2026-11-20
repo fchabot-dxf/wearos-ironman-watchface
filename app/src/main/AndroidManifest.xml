@@ -245,6 +245,22 @@
                 android:resource="@drawable/ic_launcher" />
         </service>
 
+        <!-- Wear OS Tile 8: Grille horaire (radio schedule, defaults to ICI Première) -->
+        <service
+            android:name="com.dansemur.ironman.tile.GrilleTileService"
+            android:icon="@drawable/ic_launcher"
+            android:label="Grille horaire"
+            android:description="@string/tile_grille_desc"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/ic_launcher" />
+        </service>
+
     </application>
 
 </manifest>
