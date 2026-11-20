@@ -120,7 +120,7 @@
         <!-- Wear OS Tile: Latest Screenshot & Live Progress -->
         <service
             android:name="com.dansemur.ironman.tile.ProgressBoardTileService"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_tile_progress"
             android:label="Progress Board"
             android:description="@string/app_name"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
@@ -130,13 +130,13 @@
             </intent-filter>
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher" />
+                android:resource="@drawable/ic_tile_progress" />
         </service>
 
         <!-- Wear OS Tile 1: Prévisions & Météo GEM -->
         <service
             android:name="com.dansemur.ironman.tile.PrevisionsTileService"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_tile_previsions"
             android:label="Prévisions Météo"
             android:description="@string/tile_previsions_desc"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
@@ -146,13 +146,13 @@
             </intent-filter>
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher" />
+                android:resource="@drawable/ic_tile_previsions" />
         </service>
 
         <!-- Wear OS Tile 2: Radar Pluie Direct -->
         <service
             android:name="com.dansemur.ironman.tile.RadarTileService"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_tile_radar"
             android:label="Radar Pluie Direct"
             android:description="@string/tile_radar_desc"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
@@ -162,13 +162,13 @@
             </intent-filter>
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher" />
+                android:resource="@drawable/ic_tile_radar" />
         </service>
 
         <!-- Wear OS Tile 3: Fil de Nouvelles -->
         <service
             android:name="com.dansemur.ironman.tile.NewsTileService"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_tile_news"
             android:label="Fil de Nouvelles"
             android:description="@string/tile_news_desc"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
@@ -178,13 +178,13 @@
             </intent-filter>
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher" />
+                android:resource="@drawable/ic_tile_news" />
         </service>
 
         <!-- Wear OS Tile 4: Collecte -->
         <service
             android:name="com.dansemur.ironman.tile.CollecteTileService"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_tile_collecte"
             android:label="Collecte"
             android:description="@string/tile_collecte_desc"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
@@ -194,13 +194,13 @@
             </intent-filter>
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher" />
+                android:resource="@drawable/ic_tile_collecte" />
         </service>
 
         <!-- Wear OS Tile 5: Maison (radio/Tivoli status) -->
         <service
             android:name="com.dansemur.ironman.tile.MaisonTileService"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_tile_maison"
             android:label="Maison"
             android:description="@string/tile_maison_desc"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
@@ -210,13 +210,13 @@
             </intent-filter>
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher" />
+                android:resource="@drawable/ic_tile_maison" />
         </service>
 
         <!-- Wear OS Tile 6: Bus (nearest STM arrival) -->
         <service
             android:name="com.dansemur.ironman.tile.BusTileService"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_tile_bus"
             android:label="Bus"
             android:description="@string/tile_bus_desc"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
@@ -226,13 +226,13 @@
             </intent-filter>
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher" />
+                android:resource="@drawable/ic_tile_bus" />
         </service>
 
         <!-- Wear OS Tile 7: Météo (current conditions) -->
         <service
             android:name="com.dansemur.ironman.tile.MeteoTileService"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_tile_meteo"
             android:label="Météo"
             android:description="@string/tile_meteo_desc"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
@@ -242,13 +242,13 @@
             </intent-filter>
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher" />
+                android:resource="@drawable/ic_tile_meteo" />
         </service>
 
         <!-- Wear OS Tile 8: Grille horaire (radio schedule, defaults to ICI Première) -->
         <service
             android:name="com.dansemur.ironman.tile.GrilleTileService"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_tile_grille"
             android:label="Grille horaire"
             android:description="@string/tile_grille_desc"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER"
@@ -258,7 +258,7 @@
             </intent-filter>
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher" />
+                android:resource="@drawable/ic_tile_grille" />
         </service>
 
     </application>
