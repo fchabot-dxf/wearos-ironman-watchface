@@ -70,26 +70,51 @@ class GrilleTileService : TileService() {
                 .build()
         )
 
-        mainColumn.addContent(LayoutElementBuilders.Spacer.Builder().setHeight(dp(6f)).build())
+        mainColumn.addContent(LayoutElementBuilders.Spacer.Builder().setHeight(dp(4f)).build())
 
+        // Current show: time range (small, muted) above the title (bold, white)
         mainColumn.addContent(
             LayoutElementBuilders.Text.Builder()
-                .setText(data.headline)
+                .setText(data.currentTime ?: "")
                 .setFontStyle(
                     LayoutElementBuilders.FontStyle.Builder()
-                        .setSize(sp(16f))
+                        .setSize(sp(10f))
+                        .setColor(argb(0xFFF59E0B.toInt())) // amber: "on air now"
+                        .build()
+                )
+                .build()
+        )
+        mainColumn.addContent(
+            LayoutElementBuilders.Text.Builder()
+                .setText(data.currentName)
+                .setFontStyle(
+                    LayoutElementBuilders.FontStyle.Builder()
+                        .setSize(sp(14f))
                         .setColor(argb(0xFFFFFFFF.toInt()))
                         .build()
                 )
-                .setMaxLines(3)
+                .setMaxLines(2)
                 .build()
         )
 
-        if (data.subline != null) {
-            mainColumn.addContent(LayoutElementBuilders.Spacer.Builder().setHeight(dp(4f)).build())
+        mainColumn.addContent(LayoutElementBuilders.Spacer.Builder().setHeight(dp(6f)).build())
+
+        // Next show: same shape, dimmer - "what's coming up"
+        if (data.nextName != null) {
             mainColumn.addContent(
                 LayoutElementBuilders.Text.Builder()
-                    .setText(data.subline)
+                    .setText(data.nextTime ?: "")
+                    .setFontStyle(
+                        LayoutElementBuilders.FontStyle.Builder()
+                            .setSize(sp(10f))
+                            .setColor(argb(0xFF64748B.toInt()))
+                            .build()
+                    )
+                    .build()
+            )
+            mainColumn.addContent(
+                LayoutElementBuilders.Text.Builder()
+                    .setText(data.nextName)
                     .setFontStyle(
                         LayoutElementBuilders.FontStyle.Builder()
                             .setSize(sp(12f))
@@ -144,27 +169,46 @@ class GrilleTileService : TileService() {
         } catch (_: Exception) {}
     }
 
-    private data class GrilleTileData(val label: String, val headline: String, val subline: String?)
+    private data class GrilleTileData(
+        val label: String,
+        val currentName: String,
+        val currentTime: String?,
+        val nextName: String?,
+        val nextTime: String?,
+    )
 
     private fun parseGrille(jsonStr: String?): GrilleTileData {
         if (jsonStr == null) {
-            return GrilleTileData("Première", "Chargement...", null)
+            return GrilleTileData("Première", "Chargement...", null, null, null)
         }
         try {
             val obj = JSONObject(jsonStr)
             val label = obj.optString("label", "Première")
-            val current = obj.optString("current", null)
-            val next = obj.optString("next", null)
-            val nextTime = obj.optString("nextTime", null)
+            val current = obj.optJSONObject("current")
+            val next = obj.optJSONObject("next")
 
-            val headline = if (!current.isNullOrEmpty()) current else "Aucune émission"
-            val subline = if (!next.isNullOrEmpty()) {
-                if (!nextTime.isNullOrEmpty()) "Ensuite: $next ($nextTime)" else "Ensuite: $next"
-            } else null
+            val currentName = current?.optString("name", null)
+            val currentTime = current?.let { c ->
+                val start = c.optString("start", null)
+                val end = c.optString("end", null)
+                if (!start.isNullOrEmpty() && !end.isNullOrEmpty()) "$start – $end" else null
+            }
+            val nextName = next?.optString("name", null)
+            val nextTime = next?.let { n ->
+                val start = n.optString("start", null)
+                val end = n.optString("end", null)
+                if (!start.isNullOrEmpty() && !end.isNullOrEmpty()) "$start – $end" else null
+            }
 
-            return GrilleTileData(label, headline, subline)
+            return GrilleTileData(
+                label,
+                if (!currentName.isNullOrEmpty()) currentName else "Aucune émission",
+                currentTime,
+                nextName,
+                nextTime,
+            )
         } catch (_: Exception) {
-            return GrilleTileData("Première", "Erreur", null)
+            return GrilleTileData("Première", "Erreur", null, null, null)
         }
     }
 }
